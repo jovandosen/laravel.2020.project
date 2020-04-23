@@ -13,7 +13,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('bar', function($app){
+            return new \App\Services\Bar();
+        });
+
+        $this->app->bind('test', function($app){
+            return new \App\Services\Test();
+        });
     }
 
     /**
@@ -23,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $bar = $this->app->make('bar');
+        $test = $this->app->make('test');
     }
 }

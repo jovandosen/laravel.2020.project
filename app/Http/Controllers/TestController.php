@@ -26,5 +26,29 @@ class TestController extends Controller
     public function bar(ContainerInterface $container)
     {
     	echo "Some nice text to display.";
+        $barService = $container->get('bar');
+        echo $barService->bar();
+    }
+
+    /**
+     * Display baz content
+     *
+     *
+     */
+    public function baz(ContainerInterface $container)
+    {
+        $bazService = $container->get('baz');
+        echo $bazService->baz(1, 'Dadada');
+    }
+
+    /**
+     * Display test function data
+     *
+     *
+     */
+    public function test(ContainerInterface $container)
+    {
+        $testService = $container->get('test');
+        echo $testService->test();
     }
 }

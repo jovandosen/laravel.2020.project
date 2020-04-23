@@ -55,6 +55,12 @@
                             <li class="nav-item">
                                 <a href="{{ route('bar') }}" class="nav-link">{{ __('Bar') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('baz') }}" class="nav-link">{{ __('Baz') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('test') }}" class="nav-link">{{ __('Test') }}</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

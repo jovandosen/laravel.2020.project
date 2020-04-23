@@ -24,3 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/foo', 'TestController@foo')->name('foo');
 
 Route::get('/bar', 'TestController@bar')->name('bar');
+
+Route::get('/baz', 'TestController@baz')->name('baz');
+
+Route::get('/test', 'TestController@test')->name('test');

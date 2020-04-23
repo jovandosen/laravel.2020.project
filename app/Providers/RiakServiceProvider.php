@@ -14,8 +14,8 @@ class RiakServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Bar::class, function ($app) {
-            return new Bar();
+        $this->app->bind('baz', function ($app) {
+            return new \App\Services\Baz();
         });
     }
 
@@ -26,6 +26,6 @@ class RiakServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $baz = $this->app->make('baz');
     }
 }
