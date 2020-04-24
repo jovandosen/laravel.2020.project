@@ -28,3 +28,7 @@ Route::get('/bar', 'TestController@bar')->name('bar');
 Route::get('/baz', 'TestController@baz')->name('baz');
 
 Route::get('/test', 'TestController@test')->name('test');
+
+Route::get('/profile', 'ShowProfile')->name('profile')->middleware('auth');
+
+Route::resource('photos', 'PhotoController');
