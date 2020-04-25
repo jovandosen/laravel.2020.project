@@ -32,3 +32,9 @@ Route::get('/test', 'TestController@test')->name('test');
 Route::get('/profile', 'ShowProfile')->name('profile')->middleware('auth');
 
 Route::resource('photos', 'PhotoController');
+
+// Post routes
+
+Route::get('/posts/create', 'PostController@create')->name('post.show');
+
+Route::post('/posts', 'PostController@store')->name('post.store');
