@@ -19,6 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/post.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -90,5 +91,7 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="{!! asset('js/post.js') !!}"></script>
 </body>
 </html>

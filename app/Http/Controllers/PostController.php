@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
+use App\Post;
+use Log;
 
 class PostController extends Controller
 {
@@ -32,12 +35,42 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-    	$postValidatedData = $request->validate([
-    		'title' => 'required|unique:posts|max:255',
-    		'excerpt' => 'required',
-    		'content' => 'required|min:3',
+    	$userID = $request->input('userID');
+    	$postTitle = $request->input('title');
+    	$postExcerpt = $request->input('excerpt');
+    	$postContent = $request->input('content');
+    	$postImage = $request->file('image');
+
+    	if( !empty($postImage) ){
+    		if( $postImage->isValid() ){
+    			$imageName = $postImage->getClientOriginalName();
+                $imageExtension = $postImage->extension();
+                $imagePath = $postImage->path();
+                $storePostImage = $postImage->store('posts');
+                $image = $imageName;
+    		}
+    	} else {
+    		$image = '';
+    	}
+
+    	$post = Post::create([
+    		'userID' => $userID,
+    		'title' => $postTitle,
+    		'excerpt' => $postExcerpt,
+    		'content' => $postContent,
+    		'image' => $image
     	]);
+
+    	if( $post ){
+    		// Log post created
+    		Log::info('New Post Created.');
+    		// Flash message
+    		$request->session()->flash('postCreated', 'You have successfully created Post.');
+    		// redirect
+    		return redirect()->route('post.show');
+    	}
+
     }
 }
