@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use Log;
+use View;
 
 class PostController extends Controller
 {
@@ -17,6 +18,17 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * Display post list
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $posts = Post::all();
+        return View::make('posts', ['posts' => $posts]);
     }
 
 	/**
@@ -72,5 +84,26 @@ class PostController extends Controller
     		return redirect()->route('post.show');
     	}
 
+    }
+
+    /**
+     * Delete post
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        $postID = (int) $id;
+
+        $post = Post::find($postID);
+
+        $post->delete();
+
+        $request->session()->flash('postDeleted', 'You have successfully deleted Post.');
+
+        return redirect()->route('post.list');
     }
 }

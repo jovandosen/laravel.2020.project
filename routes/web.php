@@ -38,3 +38,7 @@ Route::resource('photos', 'PhotoController');
 Route::get('/posts/create', 'PostController@create')->name('post.show');
 
 Route::post('/posts', 'PostController@store')->name('post.store');
+
+Route::get('/posts/list', 'PostController@index')->name('post.list');
+
+Route::delete('/posts/delete/{id}', 'PostController@destroy')->name('post.delete');
