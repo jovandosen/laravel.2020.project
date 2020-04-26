@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', '| Add Post')
+
 @section('content')
 <div class="container">
 	@if( session()->has('postCreated') )
