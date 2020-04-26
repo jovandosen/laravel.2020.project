@@ -55,25 +55,6 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-	function confirmAction(that)
-	{
-		var buttonElement = that;
-		var buttonElementID = buttonElement.id;
-		var postForm = $("#" + buttonElementID).parent();
-		var postFormID = postForm[0].id;
-		$("#confirm-yes").attr("data-send", postFormID);
-	}
-
-	function confirmActionYes(that)
-	{
-		var el = that;
-		var formID = el.dataset.send;
-		$("#postModal").modal('toggle');
-		$("#" + formID).submit();
-	}
-</script>
-
 <!-- Modal -->
 <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   	<div class="modal-dialog modal-dialog-centered" role="document">

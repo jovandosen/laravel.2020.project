@@ -37399,6 +37399,21 @@ function checkFlashMessage() {
   }
 }
 
+window.confirmAction = function (that) {
+  var buttonElement = that;
+  var buttonElementID = buttonElement.id;
+  var postForm = $("#" + buttonElementID).parent();
+  var postFormID = postForm[0].id;
+  $("#confirm-yes").attr("data-send", postFormID);
+};
+
+window.confirmActionYes = function (that) {
+  var el = that;
+  var formID = el.dataset.send;
+  $("#postModal").modal('toggle');
+  $("#" + formID).submit();
+};
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":
