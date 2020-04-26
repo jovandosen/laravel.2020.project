@@ -22,7 +22,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-    <x-package-alert/>
+    @php $message = 'test'; $type = 'success'; @endphp
+    <x-package-alert type="error" :message="$message" :type="$type"/>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
