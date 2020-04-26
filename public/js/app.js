@@ -37373,6 +37373,32 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     encrypted: true
 // });
 
+__webpack_require__(/*! ./post */ "./resources/js/post.js");
+
+/***/ }),
+
+/***/ "./resources/js/post.js":
+/*!******************************!*\
+  !*** ./resources/js/post.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  checkFlashMessage();
+});
+
+function checkFlashMessage() {
+  var text = $("#flash-message-content").text();
+
+  if (text != '') {
+    setInterval(function () {
+      // remove flash message box from DOM
+      $("#flash-message-box").fadeOut(3000);
+    }, 5000);
+  }
+}
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":

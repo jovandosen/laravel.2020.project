@@ -93,7 +93,5 @@
             @yield('content')
         </main>
     </div>
-
-    <script src="{!! asset('js/post.js') !!}"></script>
 </body>
 </html>
