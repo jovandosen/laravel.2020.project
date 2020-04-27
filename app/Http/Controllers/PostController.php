@@ -106,4 +106,21 @@ class PostController extends Controller
 
         return redirect()->route('post.list');
     }
+
+    /**
+     * Show form for post update
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request, $id)
+    {
+        $postID = (int) $id;
+
+        $post = Post::find($postID);
+
+        return view('edit_post', ['post' => $post]);
+    }
 }

@@ -42,3 +42,5 @@ Route::post('/posts', 'PostController@store')->name('post.store');
 Route::get('/posts/list', 'PostController@index')->name('post.list');
 
 Route::delete('/posts/delete/{id}', 'PostController@destroy')->name('post.delete');
+
+Route::patch('/posts/edit/{id}', 'PostController@edit')->name('post.edit');
