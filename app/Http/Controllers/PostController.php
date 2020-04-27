@@ -60,8 +60,18 @@ class PostController extends Controller
     			$imageName = $postImage->getClientOriginalName();
                 $imageExtension = $postImage->extension();
                 $imagePath = $postImage->path();
-                $storePostImage = $postImage->store('posts');
-                $image = $imageName;
+                // $storePostImage = $postImage->store('posts');
+
+                if( file_exists( public_path('/images/posts/' . $imageName ) ) ){
+                    $random = rand(1, 10000);
+                    $imgName = pathinfo($imageName, PATHINFO_FILENAME);
+                    $img = $imgName . $random . '.' . $imageExtension;
+                    $storePostImage = $postImage->move( public_path('/images/posts/'), $img );
+                    $image = $img;
+                } else {
+                    $storePostImage = $postImage->move( public_path('/images/posts/'), $imageName );
+                    $image = $imageName;
+                }
     		}
     	} else {
     		$image = '';
@@ -117,6 +127,8 @@ class PostController extends Controller
      */
     public function edit(Request $request, $id)
     {
+        /*var_dump( public_path('/images/posts/') );
+        die();*/
         $postID = (int) $id;
 
         $post = Post::find($postID);
