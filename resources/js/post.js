@@ -28,3 +28,8 @@ window.confirmActionYes = function(that){
 	$("#postModal").modal('toggle');
 	$("#" + formID).submit();
 }
+
+window.confirmPostUpdate = function(){
+	$("#postModal").modal('toggle');
+    $("#update-post-form").submit();
+}

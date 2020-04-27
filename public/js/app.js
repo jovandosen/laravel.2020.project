@@ -37414,6 +37414,11 @@ window.confirmActionYes = function (that) {
   $("#" + formID).submit();
 };
 
+window.confirmPostUpdate = function () {
+  $("#postModal").modal('toggle');
+  $("#update-post-form").submit();
+};
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":

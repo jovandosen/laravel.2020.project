@@ -7,7 +7,7 @@
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 
-			<form method="POST" action="#" enctype="multipart/form-data">
+			<form method="POST" action="{{ route('post.update', ['id' => $post->id]) }}" enctype="multipart/form-data" id="update-post-form">
 
 				<div class="form-group">
             		<label for="title">Title</label>
@@ -63,8 +63,12 @@
 
             		</div>	
 
-            		<div class="col-md-6">
-            			<p>test</p>
+            		<div class="col-md-6 text-right">
+            			@if( $post->image )
+                                    <img src='{{ asset("images/posts/$post->image") }}' class="img-fluid">
+                              @else
+                                    <h5>No Image.</h5>      
+                              @endif
             		</div>	
 
             	</div>	
@@ -74,7 +78,7 @@
             	<input type="hidden" name="userID" value="{{ Auth::user()->id }}">
             	<input type="hidden" name="postImage" value="{{ $post->image }}">
 
-            	<button type="submit" class="btn btn-primary">EDIT POST</button>
+            	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal">EDIT POST</button>
             	@csrf
             	@method('PATCH')
 
@@ -82,4 +86,26 @@
 		</div>	
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+                  <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">Update Post</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                  </button>
+                  </div>
+                  <div class="modal-body">
+                  {{ __('Are You sure You want to update this Post ?') }}
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-primary" data-send="" id="confirm-yes" onclick="confirmPostUpdate()">Yes</button>
+                  </div>
+          </div>
+      </div>
+</div>
+
 @endsection

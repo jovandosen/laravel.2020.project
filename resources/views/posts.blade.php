@@ -34,11 +34,7 @@
 							<td>{{ $post->content }}</td>
 							<td>{{ $post->created_at->diffForHumans() }}</td>
 							<td>
-								<form method="POST" action="{{ route('post.edit', ['id' => $post->id]) }}" id="edit-post-form">
-									<button type="submit" class="btn btn-sm btn-primary" id="edit-post">{{ __('EDIT') }}</button>
-									@method('PATCH')
-									@csrf
-								</form>
+								<a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-sm btn-primary">{{ __('EDIT') }}</a>
 							</td>
 							<td>
 								<form method="POST" action="{{ route('post.delete', ['id' => $post->id]) }}" id="delete-post-form-{{ $post->id }}">

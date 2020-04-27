@@ -44,7 +44,7 @@ class PostController extends Controller
     /**
      * Store a newly created Post in database
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\PostRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(PostRequest $request)
@@ -120,19 +120,33 @@ class PostController extends Controller
     /**
      * Show form for post update
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
-        /*var_dump( public_path('/images/posts/') );
-        die();*/
         $postID = (int) $id;
 
         $post = Post::find($postID);
 
         return view('edit_post', ['post' => $post]);
+    }
+
+    /**
+     * Update Post data
+     *
+     * @param  App\Http\Requests\PostRequest  $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(PostRequest $request, $id)
+    {
+        $postID = (int) $id;
+
+        $post = Post::find($postID);
+
+        var_dump($post);
     }
 }
