@@ -4,13 +4,22 @@
 
 @section('content')
 <div class="container">
+	@if( session()->has('movieCreated') )
+		<div class="row justify-content-center" id="flash-message-box">
+			<div class="col-md-8">
+				<div class="alert alert-success" role="alert" id="flash-message-content">
+					{{ session()->get('movieCreated') }}
+				</div>
+			</div>	
+		</div>	
+	@endif
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 			<form method="POST" action="{{ route('movie.store') }}" enctype="multipart/form-data">
 				
 				<div class="form-group">
 					<label for="title">Title</label>
-					<input type="text" name="title" id="title" placeholder="Movie title..." autocomplete="off" class="form-control" aria-describedby="titleHelp" maxlength="255">
+					<input type="text" name="title" id="title" placeholder="Movie title..." autocomplete="off" class="form-control @if( $errors->has('title') ) field-error @endif" aria-describedby="titleHelp" maxlength="255" value="{{ old('title') }}">
 					<small id="titleHelp" class="form-text text-muted">
 						@if( $errors->has('title') )
             				<font color="red">
@@ -24,7 +33,7 @@
 
 				<div class="form-group">
 					<label for="description">Description</label>
-					<textarea class="form-control" name="description" id="description" placeholder="Movie description..." minlength="3" aria-describedby="descriptionHelp"></textarea>
+					<textarea class="form-control @if( $errors->has('description') ) field-error @endif" name="description" id="description" placeholder="Movie description..." minlength="3" aria-describedby="descriptionHelp">{{ old('description') }}</textarea>
 					<small id="descriptionHelp" class="form-text text-muted">
 						@if( $errors->has('description') )
             				<font color="red">
