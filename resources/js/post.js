@@ -50,3 +50,10 @@ window.restoreImageData = function(){
 	$("#image-box").append("<img src='"+restoredImgSrc+"' class='img-fluid' id='post-img'>");
 	$("#image-box").append("<p id='remove-post-image'><a href='javascript:void(0)' class='btn btn-sm btn-danger' onclick='removePostImage()'>remove image</a></p>");
 }
+
+window.deleteMovie = function(that){
+	var el = that;
+	var formID = el.dataset.send;
+	$("#movieModal").modal('toggle');
+	$("#" + formID).submit();
+}

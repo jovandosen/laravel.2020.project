@@ -79,4 +79,44 @@ class MovieController extends Controller
     		return redirect()->route('movie.show');
     	}
     }
+
+    /**
+     * Display Movie list
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+    	$movies = Movie::all();
+    	return View::make('movie.movies', ['movies' => $movies]);
+    }
+
+    /**
+     * Delete Movie record
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+    	$movieID = (int) $id;
+
+    	$movie = Movie::find($movieID);
+
+    	$movieImg = $movie->image;
+
+    	$movie->delete();
+
+    	$movieImgPath = public_path('/images/movies/' . $movieImg);
+
+    	if( file_exists( $movieImgPath ) ){
+    		unlink($movieImgPath);
+    	}
+
+    	$request->session()->flash('movieDeleted', 'You have successfully deleted Movie.');
+
+        return redirect()->route('movie.list');
+    }
 }
