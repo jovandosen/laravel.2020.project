@@ -204,7 +204,7 @@ class PostController extends Controller
             }
         }
 
-        $updatedAt = date("Y-m-d H:i:sa");
+        $updatedAt = date("Y-m-d h:i:sa");
 
         $post->title = $postTitle;
         $post->excerpt = $postExcerpt;

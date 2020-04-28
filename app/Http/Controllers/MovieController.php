@@ -146,6 +146,56 @@ class MovieController extends Controller
      */
     public function update(MovieRequest $request, $id)
     {
-        var_dump($id);
+        $movieID = (int) $id;
+
+        $movie = Movie::find($movieID);
+
+        $movieTitle = $request->input('title');
+        $movieDescription = $request->input('description');
+        $movieOldImage = $request->input('movieImage');
+        $movieNewImage = $request->file('image');
+
+        if( !empty($movieNewImage) ){
+            if( $movieNewImage->isValid() ){
+
+                $imageName = $movieNewImage->getClientOriginalName();
+                $imageExtension = $movieNewImage->extension();
+                $imagePath = $movieNewImage->path();
+
+                if( file_exists( public_path( '/images/movies/' . $imageName ) ) ){
+                    $random = rand(1, 10000);
+                    $imgName = pathinfo($imageName, PATHINFO_FILENAME);
+                    $img = $imgName . $random . '.' . $imageExtension;
+                    $storeMovieImage = $movieNewImage->move( public_path('/images/movies/'), $img );
+                    $image = $img;
+                } else {
+                    $storeMovieImage = $movieNewImage->move( public_path('/images/movies/'), $imageName );
+                    $image = $imageName;
+                }
+
+                $movieOldImagePath = public_path('/images/movies/' . $movieOldImage);
+
+                if( file_exists( $movieOldImagePath ) ){
+                    unlink($movieOldImagePath);
+                }
+
+            }
+        } else {
+            $image = $movieOldImage;
+        }
+
+        $updatedAt = date("Y-m-d h:i:sa");
+
+        $movie->title = $movieTitle;
+        $movie->description = $movieDescription;
+        $movie->image = $image;
+        $movie->updated_at = $updatedAt;
+
+        $movie->save();
+
+        $request->session()->flash('movieUpdated', 'You have successfully updated Movie.');
+
+        return redirect()->route('movie.edit', ['id' => $movieID]);
+
     }
 }

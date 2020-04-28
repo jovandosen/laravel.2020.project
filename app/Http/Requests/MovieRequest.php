@@ -41,7 +41,7 @@ class MovieRequest extends FormRequest
             'title.required' => 'Movie Title can not be empty.',
             'title.unique' => 'Movie with this title already exists.',
             'description.required' => 'Movie Description can not be empty.',
-            'image.required' => 'Movie Image can not be empty.',
+            'image.required_without' => 'Movie Image can not be empty.',
         ];
     }
 }
