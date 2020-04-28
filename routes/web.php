@@ -46,3 +46,9 @@ Route::delete('/posts/delete/{id}', 'PostController@destroy')->name('post.delete
 Route::get('/posts/edit/{id}', 'PostController@edit')->name('post.edit');
 
 Route::patch('/posts/update/{id}', 'PostController@update')->name('post.update');
+
+// Movie routes
+
+Route::get('/movie/create', 'MovieController@create')->name('movie.show');
+
+Route::post('/movie', 'MovieController@store')->name('movie.store');
