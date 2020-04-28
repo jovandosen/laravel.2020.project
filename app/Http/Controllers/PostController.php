@@ -110,7 +110,15 @@ class PostController extends Controller
 
         $post = Post::find($postID);
 
+        $postImg = $post->image;
+
         $post->delete();
+
+        $postImgPath = public_path('/images/posts/' . $postImg);
+
+        if( file_exists($postImgPath) ){
+            unlink($postImgPath);
+        }
 
         $request->session()->flash('postDeleted', 'You have successfully deleted Post.');
 
