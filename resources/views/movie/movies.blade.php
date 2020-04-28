@@ -31,7 +31,7 @@
   							<td>{{ $movie->title }}</td>
   							<td>{{ $movie->description }}</td>
   							<td>{{ $movie->created_at->diffForHumans() }}</td>
-  							<td><a class="btn btn-sm btn-primary" href="#">{{ __('EDIT') }}</a></td>
+  							<td><a class="btn btn-sm btn-primary" href="{{ route('movie.edit', ['id' => $movie->id]) }}">{{ __('EDIT') }}</a></td>
   							<td>
   								<form method="POST" action="{{ route('movie.delete', ['id' => $movie->id]) }}" id="delete-movie-form-{{ $movie->id }}">
   									<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#movieModal" id="delete-movie-{{ $movie->id }}" onclick="confirmAction(this)">{{ __('DELETE') }}</button>

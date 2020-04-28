@@ -37443,6 +37443,28 @@ window.deleteMovie = function (that) {
   $("#" + formID).submit();
 };
 
+window.removeMovieImage = function () {
+  $("#removedImage").val($("#movieImage").val());
+  $("#movieImage").val('');
+  $("#removed-img-src").val($("#movie-img").attr("src"));
+  $("#image-box").empty();
+  $("#image-box").append("<a href='javascript:void(0)' id='restore-image-data' class='btn btn-sm btn-primary' onclick='restoreMovieImageData()'>restore image</a>");
+};
+
+window.restoreMovieImageData = function () {
+  $("#movieImage").val($("#removedImage").val());
+  $("#removedImage").val('');
+  var restoredImgSrc = $("#removed-img-src").val();
+  $("#image-box").empty();
+  $("#image-box").append("<img src='" + restoredImgSrc + "' class='img-fluid' id='movie-img'>");
+  $("#image-box").append("<p id='remove-post-image'><a href='javascript:void(0)' class='btn btn-sm btn-danger' onclick='removeMovieImage()'>remove image</a></p>");
+};
+
+window.confirmMovieUpdate = function () {
+  $("#movieModal").modal('toggle');
+  $("#update-movie-form").submit();
+};
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":

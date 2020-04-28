@@ -33,7 +33,7 @@ class MovieController extends Controller
     /**
  	 * Store new movie
  	 *
- 	 * @param  \Illuminate\Http\Request  $request
+ 	 * @param  App\Http\Requests\MovieRequest  $request
  	 *		
  	 * @return \Illuminate\Http\Response
      */
@@ -118,5 +118,34 @@ class MovieController extends Controller
     	$request->session()->flash('movieDeleted', 'You have successfully deleted Movie.');
 
         return redirect()->route('movie.list');
+    }
+
+    /**
+     * Show form for editing Movie
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $movieID = (int) $id;
+
+        $movie = Movie::find($movieID);
+
+        return view('movie.edit_movie', ['movie' => $movie]);
+    }
+
+    /**
+     * Update Movie details
+     *
+     * @param  App\Http\Requests\MovieRequest  $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(MovieRequest $request, $id)
+    {
+        var_dump($id);
     }
 }
