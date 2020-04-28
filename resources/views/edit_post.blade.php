@@ -74,9 +74,14 @@
 
             		<div class="col-md-6 text-right">
             			@if( $post->image )
-                                    <img src='{{ asset("images/posts/$post->image") }}' class="img-fluid">
+                                    <div id="image-box">
+                                          <img src='{{ asset("images/posts/$post->image") }}' class="img-fluid" id="post-img">
+                                          <p id="remove-post-image"><a href="javascript:void(0)" onclick="removePostImage()" class="btn btn-sm btn-danger">remove image</a></p>
+                                    </div>
                               @else
-                                    <h5>No Image.</h5>      
+                                    <div id="no-image-box">
+                                          <h5>No Image.</h5>    
+                                    </div>  
                               @endif
             		</div>	
 
@@ -85,7 +90,9 @@
             	
 
             	<input type="hidden" name="userID" value="{{ Auth::user()->id }}">
-            	<input type="hidden" name="postImage" value="@if( $post->image ) {{ $post->image }} @endif">
+            	<input type="hidden" name="postImage" value="@if( $post->image ) {{ $post->image }} @endif" id="postImage">
+                  <input type="hidden" name="removedImage" value="" id="removedImage">
+                  <input type="hidden" name="removedImgSrc" value="" id="removed-img-src">
 
             	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal">EDIT POST</button>
             	@csrf

@@ -153,6 +153,15 @@ class PostController extends Controller
         $postOldImage = $request->input('postImage');
         $postNewImage = $request->file('image');
 
+        $postImageRemoved = $request->input('removedImage');
+
+        if( !empty($postImageRemoved) ){
+            $removeImgPath = public_path('/images/posts/' . $postImageRemoved);
+            if( file_exists($removeImgPath) ){
+                unlink($removeImgPath);
+            }
+        }
+
         if( is_null($postOldImage) ){
             $image = '';
         } else {

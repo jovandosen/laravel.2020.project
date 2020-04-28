@@ -10886,3 +10886,7 @@ a.text-dark:focus {
   border: 1px solid red;
 }
 
+#remove-post-image {
+  margin-top: 5px;
+}
+
