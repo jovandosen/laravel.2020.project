@@ -147,6 +147,58 @@ class PostController extends Controller
 
         $post = Post::find($postID);
 
-        var_dump($post);
+        $postTitle = $request->input('title');
+        $postExcerpt = $request->input('excerpt');
+        $postContent = $request->input('content');
+        $postOldImage = $request->input('postImage');
+        $postNewImage = $request->file('image');
+
+        if( is_null($postOldImage) ){
+            $image = '';
+        } else {
+            $image = $postOldImage;
+        }
+
+        if( !empty($postNewImage) ){
+            if( $postNewImage->isValid() ){
+                $imageName = $postNewImage->getClientOriginalName();
+                $imageExtension = $postNewImage->extension();
+                $imagePath = $postNewImage->path();
+
+                if( file_exists( public_path('/images/posts/' . $imageName) ) ){
+                    $random = rand(1, 10000);
+                    $imgName = pathinfo($imageName, PATHINFO_FILENAME);
+                    $img = $imgName . $random . '.' . $imageExtension;
+                    $storePostImage = $postNewImage->move( public_path('/images/posts/'), $img );
+                    $image = $img;
+                } else {
+                    $storePostImage = $postNewImage->move( public_path('/images/posts/'), $imageName );
+                    $image = $imageName;
+                }
+
+                if( !empty($postOldImage) ){
+                    $imgPath = public_path('/images/posts/' . $postOldImage);
+                    // remove old image from storage
+                    if( file_exists( $imgPath ) ){
+                        // delete image
+                        unlink( $imgPath );
+                    }
+                }
+            }
+        }
+
+        $updatedAt = date("Y-m-d H:i:sa");
+
+        $post->title = $postTitle;
+        $post->excerpt = $postExcerpt;
+        $post->content = $postContent;
+        $post->image = $image;
+        $post->updated_at = $updatedAt;
+
+        $post->save(); 
+
+        $request->session()->flash('postUpdated', 'You have successfully updated Post.');
+
+        return redirect()->route('post.edit', ['id' => $postID]);
     }
 }

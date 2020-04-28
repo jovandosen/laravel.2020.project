@@ -4,6 +4,15 @@
 
 @section('content')
 <div class="container">
+      @if( session()->has('postUpdated') )
+            <div class="row justify-content-center" id="flash-message-box">
+                  <div class="col-md-8">
+                        <div class="alert alert-success" role="alert" id="flash-message-content">
+                              {{ session()->get('postUpdated') }}
+                        </div>
+                  </div>      
+            </div>      
+      @endif
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 
@@ -76,7 +85,7 @@
             	
 
             	<input type="hidden" name="userID" value="{{ Auth::user()->id }}">
-            	<input type="hidden" name="postImage" value="{{ $post->image }}">
+            	<input type="hidden" name="postImage" value="@if( $post->image ) {{ $post->image }} @endif">
 
             	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal">EDIT POST</button>
             	@csrf
