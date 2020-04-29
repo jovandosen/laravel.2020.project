@@ -7,6 +7,8 @@ use View;
 use App\Http\Requests\MovieRequest;
 use App\Movie;
 use Log;
+use Illuminate\Support\Facades\Gate;
+use Auth;
 
 class MovieController extends Controller
 {
@@ -27,6 +29,7 @@ class MovieController extends Controller
 	 */
     public function create()
     {
+        Gate::authorize('create-movie');
     	return View::make('movie.movie');
     }
 
@@ -105,6 +108,8 @@ class MovieController extends Controller
 
     	$movie = Movie::find($movieID);
 
+        Gate::authorize('delete-movie', $movie);
+
     	$movieImg = $movie->image;
 
     	$movie->delete();
@@ -149,6 +154,8 @@ class MovieController extends Controller
         $movieID = (int) $id;
 
         $movie = Movie::find($movieID);
+
+        Gate::authorize('update-movie', $movie);
 
         $movieTitle = $request->input('title');
         $movieDescription = $request->input('description');

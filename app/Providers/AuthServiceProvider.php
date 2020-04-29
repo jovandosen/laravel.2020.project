@@ -28,22 +28,32 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // Gate actions
-
-        /*Gate::define('edit-settings', function ($user) {
-            return $user->isAdmin;
-        });
+        // Post Gates
 
         Gate::define('update-post', function ($user, $post) {
-            return $user->id === $post->user_id;
+            return $user->id === $post->userID;
         });
 
         Gate::define('delete-post', function ($user, $post) {
-            return $user->id === $post->user_id;
+            return $user->id === $post->userID;
         });
 
         Gate::define('create-post', function ($user) {
-            return $user->isAdmin;
-        });*/
+            return $user->admin;
+        });
+
+        // Movie Gates
+
+        Gate::define('update-movie', function ($user, $movie) {
+            return $user->id === $movie->user_id;
+        });
+
+        Gate::define('delete-movie', function ($user, $movie) {
+            return $user->id === $movie->user_id;
+        });
+
+        Gate::define('create-movie', function ($user) {
+            return $user->admin;
+        });
     }
 }

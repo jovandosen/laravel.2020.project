@@ -7,6 +7,7 @@ use App\Http\Requests\PostRequest;
 use App\Post;
 use Log;
 use View;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -38,6 +39,7 @@ class PostController extends Controller
 	 */
     public function create()
     {
+        Gate::authorize('create-post');
     	return view('post');
     }
 
@@ -110,14 +112,18 @@ class PostController extends Controller
 
         $post = Post::find($postID);
 
+        Gate::authorize('delete-post', $post);
+
         $postImg = $post->image;
 
         $post->delete();
 
-        $postImgPath = public_path('/images/posts/' . $postImg);
+        if( !empty($postImg) ){
+            $postImgPath = public_path('/images/posts/' . $postImg);
 
-        if( file_exists($postImgPath) ){
-            unlink($postImgPath);
+            if( file_exists($postImgPath) ){
+                unlink($postImgPath);
+            }
         }
 
         $request->session()->flash('postDeleted', 'You have successfully deleted Post.');
@@ -154,6 +160,8 @@ class PostController extends Controller
         $postID = (int) $id;
 
         $post = Post::find($postID);
+
+        Gate::authorize('update-post', $post);
 
         $postTitle = $request->input('title');
         $postExcerpt = $request->input('excerpt');
