@@ -40,6 +40,10 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, $id)
     {
-    	var_dump($id);
+    	$userID = (int) $id;
+
+    	$user = User::find($userID);
+
+    	var_dump($user);
     }
 }

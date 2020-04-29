@@ -79,3 +79,8 @@ window.confirmMovieUpdate = function(){
 	$("#movieModal").modal('toggle');
 	$("#update-movie-form").submit();
 }
+
+window.confirmUserProfileUpdate = function(){
+	$("#userProfileModal").modal('toggle');
+	$("#update-profile-form").submit();
+}

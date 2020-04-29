@@ -37465,6 +37465,11 @@ window.confirmMovieUpdate = function () {
   $("#update-movie-form").submit();
 };
 
+window.confirmUserProfileUpdate = function () {
+  $("#userProfileModal").modal('toggle');
+  $("#update-profile-form").submit();
+};
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":

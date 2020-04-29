@@ -7,7 +7,7 @@
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 
-			<form method="POST" action="{{ route('profile.update', ['id' => Auth::user()->id]) }}" enctype="multipart/form-data">
+			<form method="POST" action="{{ route('profile.update', ['id' => Auth::user()->id]) }}" enctype="multipart/form-data" id="update-profile-form">
 				
 				<div class="form-group">
 					<label for="name">Name</label>
@@ -56,7 +56,7 @@
 
 				<input type="hidden" name="userID" value="{{ Auth::user()->id }}">
 
-				<button type="submit" class="btn btn-primary">UPDATE PROFILE</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userProfileModal">UPDATE PROFILE</button>
 				@csrf
 				@method('PATCH')
 
@@ -65,4 +65,26 @@
 		</div>
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="userProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+                  <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">Update Profile</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                  </button>
+                  </div>
+                  <div class="modal-body">
+                  {{ __('Are You sure You want to update Profile details ?') }}
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-primary" data-send="" id="confirm-yes" onclick="confirmUserProfileUpdate()">Update</button>
+                  </div>
+          </div>
+      </div>
+</div>
+
 @endsection
