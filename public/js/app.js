@@ -37470,6 +37470,23 @@ window.confirmUserProfileUpdate = function () {
   $("#update-profile-form").submit();
 };
 
+window.removeUserImage = function () {
+  $("#removedImage").val($("#userImage").val());
+  $("#userImage").val('');
+  $("#removed-img-src").val($("#user-image").attr("src"));
+  $("#image-box").empty();
+  $("#image-box").append("<a href='javascript:void(0)' id='restore-image-data' class='btn btn-sm btn-primary' onclick='restoreUserImageData()'>restore image</a>");
+};
+
+window.restoreUserImageData = function () {
+  $("#userImage").val($("#removedImage").val());
+  $("#removedImage").val('');
+  var restoredImgSrc = $("#removed-img-src").val();
+  $("#image-box").empty();
+  $("#image-box").append("<img src='" + restoredImgSrc + "' class='img-fluid' id='user-image'>");
+  $("#image-box").append("<p id='remove-user-image'><a href='javascript:void(0)' class='btn btn-sm btn-danger' onclick='removeUserImage()'>remove image</a></p>");
+};
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":

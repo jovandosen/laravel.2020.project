@@ -4,6 +4,15 @@
 
 @section('content')
 <div class="container">
+	@if( session()->has('userProfileUpdated') )
+        <div class="row justify-content-center" id="flash-message-box">
+              <div class="col-md-8">
+                    <div class="alert alert-success" role="alert" id="flash-message-content">
+                          {{ session()->get('userProfileUpdated') }}
+                    </div>
+              </div>      
+        </div>      
+  	@endif
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 
@@ -47,14 +56,24 @@
 					</div>
 					<div class="col-md-6 text-right">
 						@if( Auth::user()->image )
-							<img src="#">
+							<div id="image-box">
+								@php $imgPath = Auth::user()->image; @endphp
+								<img src='{{ asset("/images/profile/$imgPath") }}' class="img-fluid" id="user-image">
+								<p id="remove-user-image"><a href="javascript:void(0)" onclick="removeUserImage()" class="btn btn-sm btn-danger">remove image</a></p>
+							</div>	
 						@else
-							<h5>No Profile image.</h5>	
+							<div id="no-image-box">
+								<h5>No Profile image.</h5>	
+							</div>
 						@endif
 					</div>
 				</div>
 
 				<input type="hidden" name="userID" value="{{ Auth::user()->id }}">
+				<input type="hidden" name="userImage" value="@if( Auth::user()->image ) {{ Auth::user()->image }} @endif" id="userImage">
+				<input type="hidden" name="removedImage" value="" id="removedImage">
+				<input type="hidden" name="removedImgSrc" value="" id="removed-img-src">
+				<input type="hidden" name="userOldImage" value="{{ Auth::user()->image }}">
 
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userProfileModal">UPDATE PROFILE</button>
 				@csrf

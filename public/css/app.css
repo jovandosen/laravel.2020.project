@@ -10886,7 +10886,8 @@ a.text-dark:focus {
   border: 1px solid red;
 }
 
-#remove-post-image {
+#remove-post-image,
+#remove-user-image {
   margin-top: 5px;
 }
 
