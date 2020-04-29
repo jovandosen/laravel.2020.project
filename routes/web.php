@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 Route::get('/foo', 'TestController@foo')->name('foo');
 
@@ -60,3 +60,7 @@ Route::delete('/movie/delete/{id}', 'MovieController@destroy')->name('movie.dele
 Route::get('/movie/edit/{id}', 'MovieController@edit')->name('movie.edit');
 
 Route::patch('/movie/update/{id}', 'MovieController@update')->name('movie.update');
+
+// Verify email routes
+
+Auth::routes(['verify' => true]);
