@@ -29,7 +29,7 @@ Route::get('/baz', 'TestController@baz')->name('baz');
 
 Route::get('/test', 'TestController@test')->name('test');
 
-Route::get('/profile', 'ShowProfile')->name('profile')->middleware('auth');
+// Route::get('/profile', 'ShowProfile')->name('profile')->middleware('auth');
 
 Route::resource('photos', 'PhotoController');
 
@@ -64,3 +64,9 @@ Route::patch('/movie/update/{id}', 'MovieController@update')->name('movie.update
 // Verify email routes
 
 Auth::routes(['verify' => true]);
+
+// Profile routes
+
+Route::get('/profile', 'ProfileController@profile')->name('profile');
+
+Route::patch('/profile/update/{id}', 'ProfileController@update')->name('profile.update');
