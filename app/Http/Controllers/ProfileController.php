@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use View;
 use App\User;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
@@ -32,13 +33,13 @@ class ProfileController extends Controller
     /**
      * Update profile data
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProfileRequest  $request
      * @param  int  $id
 	 *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProfileRequest $request, $id)
     {
-    	//
+    	var_dump($id);
     }
 }
