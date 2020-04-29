@@ -76,6 +76,7 @@
                                     <a class="dropdown-item" href="{{ route('post.list') }}">{{ __('Post List') }}</a>
                                     <a class="dropdown-item" href="{{ route('movie.show') }}">{{ __('Add Movie') }}</a>
                                     <a class="dropdown-item" href="{{ route('movie.list') }}">{{ __('Movie List') }}</a>
+                                    <a class="dropdown-item" href="{{ route('password.request') }}">{{ __('Reset Password') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
