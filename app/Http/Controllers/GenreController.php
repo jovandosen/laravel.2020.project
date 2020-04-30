@@ -71,4 +71,27 @@ class GenreController extends Controller
     	$genres = Genre::all();
     	return View::make('genre.genres', ['genres' => $genres]);
     }
+
+    /**
+     * Delete genre record
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+    	$genreID = (int) $id;
+
+    	$genre = Genre::find($genreID);
+
+    	Gate::authorize('delete-genre', $genre);
+
+    	$genre->delete();
+
+    	$request->session()->flash('genreDeleted', 'You have successfully deleted Genre.');
+
+        return redirect()->route('genre.list');
+    }
 }

@@ -78,3 +78,5 @@ Route::get('/genre/create', 'GenreController@create')->name('genre.show');
 Route::post('/genre', 'GenreController@store')->name('genre.store');
 
 Route::get('/genre/list', 'GenreController@index')->name('genre.list');
+
+Route::delete('/genre/delete/{id}', 'GenreController@destroy')->name('genre.delete');

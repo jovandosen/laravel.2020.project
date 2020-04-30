@@ -101,3 +101,10 @@ window.restoreUserImageData = function(){
 	$("#image-box").append("<img src='"+restoredImgSrc+"' class='img-fluid' id='user-image'>");
 	$("#image-box").append("<p id='remove-user-image'><a href='javascript:void(0)' class='btn btn-sm btn-danger' onclick='removeUserImage()'>remove image</a></p>");
 }
+
+window.confirmGenreActionYes = function(that){
+	var el = that;
+	var formID = el.dataset.send;
+	$("#genreModal").modal('toggle');
+	$("#" + formID).submit();
+}
