@@ -153,7 +153,7 @@ class MovieController extends Controller
         if( !empty($genres) ){
             $genres = unserialize($genres);
         } else {
-            $genres = '';
+            $genres = [];
         }
 
         $allGenres = Genre::all();
