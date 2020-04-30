@@ -55,5 +55,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-movie', function ($user) {
             return $user->admin;
         });
+
+        // Genre Gates
+
+        Gate::define('create-genre', function ($user) {
+            return $user->admin;
+        });
     }
 }

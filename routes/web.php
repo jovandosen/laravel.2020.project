@@ -70,3 +70,9 @@ Auth::routes(['verify' => true]);
 Route::get('/profile', 'ProfileController@profile')->name('profile');
 
 Route::patch('/profile/update/{id}', 'ProfileController@update')->name('profile.update');
+
+// Movie Genre routes
+
+Route::get('/genre/create', 'GenreController@create')->name('genre.show');
+
+Route::post('/genre', 'GenreController@store')->name('genre.store');
