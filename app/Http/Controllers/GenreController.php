@@ -60,4 +60,15 @@ class GenreController extends Controller
     		return redirect()->route('genre.show');
     	}
     }
+
+    /**
+     * Display Genre list
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+    	$genres = Genre::all();
+    	return View::make('genre.genres', ['genres' => $genres]);
+    }
 }

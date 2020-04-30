@@ -76,3 +76,5 @@ Route::patch('/profile/update/{id}', 'ProfileController@update')->name('profile.
 Route::get('/genre/create', 'GenreController@create')->name('genre.show');
 
 Route::post('/genre', 'GenreController@store')->name('genre.store');
+
+Route::get('/genre/list', 'GenreController@index')->name('genre.list');
