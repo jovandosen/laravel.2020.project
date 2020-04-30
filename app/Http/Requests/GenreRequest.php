@@ -24,7 +24,7 @@ class GenreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => "required|string|min:3|max:255|unique:genres",
+            'name' => "required|string|min:3|max:255|unique:genres,name,{$this->id}",
             'description' => "required|min:3"
         ];
     }

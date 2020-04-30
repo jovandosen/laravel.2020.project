@@ -37,7 +37,7 @@
   							<td>{{ $genre->description }}</td>
   							<td>{{ $genreAuthorName }}</td>
   							<td>{{ $genre->created_at->diffForHumans() }}</td>
-  							<td><a href="#">edit</a></td>
+  							<td><a href="{{ route('genre.edit', ['id' => $genre->id]) }}" class="btn btn-sm btn-primary">{{ __('Edit') }}</a></td>
   							<td>
   								<form method="POST" action="{{ route('genre.delete', ['id' => $genre->id]) }}" id="delete-genre-form-{{ $genre->id }}">
   									<button type="button" class="btn btn-sm btn-danger" id="delete-genre-{{ $genre->id }}" data-toggle="modal" data-target="#genreModal" onclick="confirmAction(this)">{{ __('Delete') }}</button>

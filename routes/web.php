@@ -80,3 +80,7 @@ Route::post('/genre', 'GenreController@store')->name('genre.store');
 Route::get('/genre/list', 'GenreController@index')->name('genre.list');
 
 Route::delete('/genre/delete/{id}', 'GenreController@destroy')->name('genre.delete');
+
+Route::get('/genre/edit/{id}', 'GenreController@edit')->name('genre.edit');
+
+Route::patch('/genre/update/{id}', 'GenreController@update')->name('genre.update');

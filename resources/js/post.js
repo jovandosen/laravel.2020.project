@@ -108,3 +108,8 @@ window.confirmGenreActionYes = function(that){
 	$("#genreModal").modal('toggle');
 	$("#" + formID).submit();
 }
+
+window.confirmGenreUpdate = function(){
+	$("#genreModal").modal('toggle');
+    $("#update-genre-form").submit();
+}

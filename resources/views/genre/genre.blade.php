@@ -19,7 +19,7 @@
 
 				<div class="form-group">
 					<label for="name">Name</label>
-					<input type="text" name="name" id="name" placeholder="Genre name..." autocomplete="off" class="form-control" aria-describedby="nameHelp" maxlength="255" minlength="3" value="{{ old('name') }}">
+					<input type="text" name="name" id="name" placeholder="Genre name..." autocomplete="off" class="form-control @if( $errors->has('name') ) field-error @endif" aria-describedby="nameHelp" maxlength="255" minlength="3" value="{{ old('name') }}">
 					<small id="nameHelp" class="form-text text-muted">
 						@if( $errors->has('name') )
             				<font color="red">
@@ -33,7 +33,7 @@
 
 				<div class="form-group">
 					<label for="description">Description</label>
-					<textarea name="description" id="description" class="form-control" aria-describedby="descriptionHelp" placeholder="Genre description..." minlength="3">{{ old('description') }}</textarea>
+					<textarea name="description" id="description" class="form-control @if( $errors->has('description') ) field-error @endif" aria-describedby="descriptionHelp" placeholder="Genre description..." minlength="3">{{ old('description') }}</textarea>
 					<small id="descriptionHelp" class="form-text text-muted">
 						@if( $errors->has('description') )
             				<font color="red">

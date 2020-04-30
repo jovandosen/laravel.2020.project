@@ -37494,6 +37494,11 @@ window.confirmGenreActionYes = function (that) {
   $("#" + formID).submit();
 };
 
+window.confirmGenreUpdate = function () {
+  $("#genreModal").modal('toggle');
+  $("#update-genre-form").submit();
+};
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":
