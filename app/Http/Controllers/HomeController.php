@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Movie;
+use DB;
 
 class HomeController extends Controller
 {
@@ -19,10 +21,26 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        if( !empty( $request->search ) ){
+
+            $search = $request->search;
+
+            $movies = DB::table('movies')
+                                    ->where('title', 'like', "%$search%")
+                                    ->orWhere('description', 'like', "%$search%")
+                                    ->get();                     
+
+            return view('home', ['movies' => $movies]);
+
+        } else {
+            $movies = Movie::all();
+            return view('home', ['movies' => $movies]);
+        }
     }
 }
