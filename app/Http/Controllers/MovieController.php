@@ -9,6 +9,7 @@ use App\Movie;
 use Log;
 use Illuminate\Support\Facades\Gate;
 use Auth;
+use App\Genre;
 
 class MovieController extends Controller
 {
@@ -30,7 +31,8 @@ class MovieController extends Controller
     public function create()
     {
         Gate::authorize('create-movie');
-    	return View::make('movie.movie');
+        $genres = Genre::all();
+    	return View::make('movie.movie', ['genres' => $genres]);
     }
 
     /**
@@ -46,6 +48,13 @@ class MovieController extends Controller
     	$movieTitle = $request->input('title');
     	$movieDescription = $request->input('description');
     	$movieImage = $request->file('image');
+        $movieGenres = $request->input('movieGenres');
+
+        if( !empty($movieGenres) ){
+            $movieGenres = serialize($movieGenres);
+        } else {
+            $movieGenres = '';
+        }
 
     	if( !empty($movieImage) ){
     		if( $movieImage->isValid() ){
@@ -73,7 +82,8 @@ class MovieController extends Controller
     		'user_id' => $userID,
     		'title' => $movieTitle,
     		'description' => $movieDescription,
-    		'image' => $image
+    		'image' => $image,
+            'genres' => $movieGenres
     	]);
 
     	if( $movie ){
@@ -138,7 +148,17 @@ class MovieController extends Controller
 
         $movie = Movie::find($movieID);
 
-        return view('movie.edit_movie', ['movie' => $movie]);
+        $genres = $movie->genres;
+
+        if( !empty($genres) ){
+            $genres = unserialize($genres);
+        } else {
+            $genres = '';
+        }
+
+        $allGenres = Genre::all();
+
+        return view('movie.edit_movie', ['movie' => $movie, 'genres' => $genres, 'allGenres' => $allGenres]);
     }
 
     /**
@@ -161,6 +181,14 @@ class MovieController extends Controller
         $movieDescription = $request->input('description');
         $movieOldImage = $request->input('movieImage');
         $movieNewImage = $request->file('image');
+
+        $movieGenres = $request->input('movieGenres');
+
+        if( !empty($movieGenres) ){
+            $movieGenres = serialize($movieGenres);
+        } else {
+            $movieGenres = '';
+        }
 
         if( !empty($movieNewImage) ){
             if( $movieNewImage->isValid() ){
@@ -197,6 +225,7 @@ class MovieController extends Controller
         $movie->description = $movieDescription;
         $movie->image = $image;
         $movie->updated_at = $updatedAt;
+        $movie->genres = $movieGenres;
 
         $movie->save();
 

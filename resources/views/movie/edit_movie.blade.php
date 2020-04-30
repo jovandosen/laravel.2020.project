@@ -83,6 +83,29 @@
 
 				</div>
 
+        <div class="form-group">
+
+            <label>Genres</label>
+
+                @foreach( $allGenres as $singleGenre )
+
+                    @php 
+                        if( in_array($singleGenre->id, $genres) ){
+                            $checked = "checked";
+                        } else {
+                            $checked = "";
+                        }
+                    @endphp
+
+                    <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="{{ $singleGenre->name }}" value="{{ $singleGenre->id }}" name="movieGenres[]" @php echo $checked; @endphp>
+                          <label class="custom-control-label" for="{{ $singleGenre->name }}">{{ $singleGenre->name }}</label>
+                    </div>
+
+                @endforeach
+
+        </div>
+
 				<input type="hidden" name="userID" value="{{ Auth::user()->id }}">
             	<input type="hidden" name="movieImage" value="@if( $movie->image ) {{ $movie->image }} @endif" id="movieImage">
                 <input type="hidden" name="removedImage" value="" id="removedImage">

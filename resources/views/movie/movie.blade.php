@@ -59,6 +59,21 @@
 					</small>
 				</div>
 
+				<div class="form-group">
+
+					<label>Genres</label>
+
+					@foreach( $genres as $genre )
+
+						<div class="custom-control custom-checkbox">
+        					<input type="checkbox" class="custom-control-input" id="{{ $genre->name }}" value="{{ $genre->id }}" name="movieGenres[]">
+        					<label class="custom-control-label" for="{{ $genre->name }}">{{ $genre->name }}</label>
+      					</div>
+
+					@endforeach
+
+				</div>
+
 				<input type="hidden" name="userID" value="{{ Auth::user()->id }}">
 
             	<button type="submit" class="btn btn-primary">ADD MOVIE</button>
