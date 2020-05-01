@@ -77,6 +77,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('post.show') }}">{{ __('Add Post') }}</a>
                                     <a class="dropdown-item" href="{{ route('post.list') }}">{{ __('Post List') }}</a>
+                                    <a class="dropdown-item" href="{{ route('category.show') }}">{{ __('Add Category') }}</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('movie.show') }}">{{ __('Add Movie') }}</a>
                                     <a class="dropdown-item" href="{{ route('movie.list') }}">{{ __('Movie List') }}</a>

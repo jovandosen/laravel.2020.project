@@ -118,3 +118,9 @@ Route::get('/get/movies', function(){
 	$movies = Cache::get('movies');
 	var_dump($movies);
 });
+
+// Category routes
+
+Route::get('/category/create', 'CategoryController@create')->name('category.show');
+
+Route::post('/category', 'CategoryController@store')->name('category.store');

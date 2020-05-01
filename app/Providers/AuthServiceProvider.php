@@ -69,5 +69,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('update-genre', function ($user, $genre) {
             return $user->id === $genre->user_id;
         });
+
+        // Category Gates
+
+        Gate::define('create-category', function ($user) {
+            return $user->admin;
+        });
     }
 }
