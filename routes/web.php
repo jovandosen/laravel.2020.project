@@ -124,3 +124,5 @@ Route::get('/get/movies', function(){
 Route::get('/category/create', 'CategoryController@create')->name('category.show');
 
 Route::post('/category', 'CategoryController@store')->name('category.store');
+
+Route::get('/category/list', 'CategoryController@index')->name('category.list');

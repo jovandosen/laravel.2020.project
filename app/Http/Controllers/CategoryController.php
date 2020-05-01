@@ -60,4 +60,15 @@ class CategoryController extends Controller
     		return redirect()->route('category.show');
     	}
     }
+
+    /**
+     * Display Category List
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+    	$categories = Category::all();
+    	return View::make('category.categories', ['categories' => $categories]);
+    }
 }
