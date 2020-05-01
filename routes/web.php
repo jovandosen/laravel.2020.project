@@ -128,3 +128,7 @@ Route::post('/category', 'CategoryController@store')->name('category.store');
 Route::get('/category/list', 'CategoryController@index')->name('category.list');
 
 Route::delete('/category/delete/{id}', 'CategoryController@destroy')->name('category.delete');
+
+Route::get('/category/edit/{id}', 'CategoryController@edit')->name('category.edit');
+
+Route::patch('/category/update/{id}', 'CategoryController@update')->name('category.update');

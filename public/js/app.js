@@ -37506,6 +37506,11 @@ window.confirmCategoryActionYes = function (that) {
   $("#" + formID).submit();
 };
 
+window.confirmCategoryUpdate = function () {
+  $("#categoryModal").modal('toggle');
+  $("#update-category-form").submit();
+};
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":

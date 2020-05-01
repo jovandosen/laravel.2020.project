@@ -120,3 +120,8 @@ window.confirmCategoryActionYes = function(that){
 	$("#categoryModal").modal('toggle');
 	$("#" + formID).submit();
 }
+
+window.confirmCategoryUpdate = function(){
+	$("#categoryModal").modal('toggle');
+    $("#update-category-form").submit();
+}

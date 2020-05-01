@@ -94,4 +94,52 @@ class CategoryController extends Controller
 
         return redirect()->route('category.list');
     }
+
+    /**
+     * Show form for editing Category
+     *
+     * @param  int  $id 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+    	$categoryID = (int) $id;
+
+    	$category = Category::find($categoryID);
+
+    	return view('category.edit_category', ['category' => $category]);
+    }
+
+    /**
+     * Update Category details
+     *
+     * @param  \App\Http\Requests\CategoryRequest  $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(CategoryRequest $request, $id)
+    {
+    	$categoryID = (int) $id;
+
+    	$category = Category::find($categoryID);
+
+    	Gate::authorize('update-category', $category);
+
+    	$categoryName = $request->input('name');
+    	$categoryDescription = $request->input('description');
+
+    	$updatedAt = date('Y-m-d h:i:sa');
+
+    	$category->name = $categoryName;
+    	$category->description = $categoryDescription;
+    	$category->updated_at = $updatedAt;
+
+    	$category->save();
+
+    	$request->session()->flash('categoryUpdated', 'You have successfully updated Category.');
+
+        return redirect()->route('category.edit', ['id' => $categoryID]);
+    }
 }

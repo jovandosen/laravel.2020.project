@@ -38,7 +38,7 @@
   							<td>{{ $category->description }}</td>
   							<td>{{ $categoryAuthorName }}</td>
   							<td>{{ $category->created_at->diffForHumans() }}</td>
-  							<td><a href="#">edit</a></td>
+  							<td><a href="{{ route('category.edit', ['id' => $category->id]) }}" class="btn btn-sm btn-primary">{{ __('Edit') }}</a></td>
   							<td>
   								<form method="POST" action="{{ route('category.delete', ['id' => $category->id]) }}" id="delete-category-form-{{ $category->id }}">
   									<button type="button" class="btn btn-sm btn-danger" id="delete-category-{{ $category->id }}" data-toggle="modal" data-target="#categoryModal" onclick="confirmAction(this)">
