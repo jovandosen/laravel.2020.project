@@ -65,6 +65,21 @@
             		<small class="form-text text-muted" id="imageHelp">Upload post image.</small>
             	</div>
 
+                  <div class="form-group">
+
+                        <label>Categories</label>
+
+                        @foreach( $categories as $category )
+
+                              <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="{{ $category->name }}" value="{{ $category->id }}" name="postCategories[]">
+                                    <label class="custom-control-label" for="{{ $category->name }}">{{ $category->name }}</label>
+                              </div>
+
+                        @endforeach
+
+                  </div>
+
             	<input type="hidden" name="userID" value="{{ Auth::user()->id }}">
 
             	<button type="submit" class="btn btn-primary">ADD POST</button>

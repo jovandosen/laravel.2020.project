@@ -87,7 +87,28 @@
 
             	</div>	
 
-            	
+            	<div class="form-group">
+
+                        <label>Categories</label>
+
+                        @foreach( $allCategories as $singleCategory )
+
+                              @php 
+                                    if( in_array($singleCategory->id, $categories) ){
+                                        $checked = "checked";
+                                    } else {
+                                        $checked = "";
+                                    }
+                              @endphp
+
+                              <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="{{ $singleCategory->name }}" value="{{ $singleCategory->id }}" name="postCategories[]" @php echo $checked; @endphp>
+                                    <label class="custom-control-label" for="{{ $singleCategory->name }}">{{ $singleCategory->name }}</label>
+                              </div>
+
+                        @endforeach
+
+                  </div>
 
             	<input type="hidden" name="userID" value="{{ Auth::user()->id }}">
             	<input type="hidden" name="postImage" value="@if( $post->image ) {{ $post->image }} @endif" id="postImage">

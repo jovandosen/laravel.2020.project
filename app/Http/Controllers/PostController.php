@@ -8,6 +8,7 @@ use App\Post;
 use Log;
 use View;
 use Illuminate\Support\Facades\Gate;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -40,7 +41,8 @@ class PostController extends Controller
     public function create()
     {
         Gate::authorize('create-post');
-    	return view('post');
+        $categories = Category::all();
+    	return view('post', ['categories' => $categories]);
     }
 
     /**
@@ -56,6 +58,13 @@ class PostController extends Controller
     	$postExcerpt = $request->input('excerpt');
     	$postContent = $request->input('content');
     	$postImage = $request->file('image');
+        $postCategories = $request->input('postCategories');
+
+        if( !empty($postCategories) ){
+            $postCategories = serialize($postCategories);
+        } else {
+            $postCategories = '';
+        }
 
     	if( !empty($postImage) ){
     		if( $postImage->isValid() ){
@@ -84,7 +93,8 @@ class PostController extends Controller
     		'title' => $postTitle,
     		'excerpt' => $postExcerpt,
     		'content' => $postContent,
-    		'image' => $image
+    		'image' => $image,
+            'categories' => $postCategories
     	]);
 
     	if( $post ){
@@ -144,7 +154,17 @@ class PostController extends Controller
 
         $post = Post::find($postID);
 
-        return view('edit_post', ['post' => $post]);
+        $categories = $post->categories;
+
+        if( !empty($categories) ){
+            $categories = unserialize($categories);
+        } else {
+            $categories = [];
+        }
+
+        $allCategories = Category::all();
+
+        return view('edit_post', ['post' => $post, 'categories' => $categories, 'allCategories' => $allCategories]);
     }
 
     /**
@@ -168,6 +188,14 @@ class PostController extends Controller
         $postContent = $request->input('content');
         $postOldImage = $request->input('postImage');
         $postNewImage = $request->file('image');
+
+        $postCategories = $request->input('postCategories');
+
+        if( !empty($postCategories) ){
+            $postCategories = serialize($postCategories);
+        } else {
+            $postCategories = '';
+        }
 
         $postImageRemoved = $request->input('removedImage');
 
@@ -219,6 +247,7 @@ class PostController extends Controller
         $post->content = $postContent;
         $post->image = $image;
         $post->updated_at = $updatedAt;
+        $post->categories = $postCategories;
 
         $post->save(); 
 
