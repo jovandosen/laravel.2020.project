@@ -90,3 +90,31 @@ Route::patch('/genre/update/{id}', 'GenreController@update')->name('genre.update
 Route::get('/foo/example', function(){
 	$command = Artisan::call('foo:example', ['name' => 'Foo']);
 });
+
+// Cache routes
+
+Route::get('/cache/users', function(){
+
+	$value = Cache::rememberForever('users', function () {
+    	return DB::table('users')->get();
+	});
+
+});
+
+Route::get('/get/users', function(){
+	$users = Cache::get('users');
+	var_dump($users);
+});
+
+Route::get('/cache/movies', function(){
+
+	$value = Cache::rememberForever('movies', function () {
+    	return DB::table('movies')->get();
+	});
+
+});
+
+Route::get('/get/movies', function(){
+	$movies = Cache::get('movies');
+	var_dump($movies);
+});
