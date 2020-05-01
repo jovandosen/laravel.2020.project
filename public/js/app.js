@@ -37499,6 +37499,13 @@ window.confirmGenreUpdate = function () {
   $("#update-genre-form").submit();
 };
 
+window.confirmCategoryActionYes = function (that) {
+  var el = that;
+  var formID = el.dataset.send;
+  $("#categoryModal").modal('toggle');
+  $("#" + formID).submit();
+};
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":

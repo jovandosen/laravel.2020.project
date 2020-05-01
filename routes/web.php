@@ -126,3 +126,5 @@ Route::get('/category/create', 'CategoryController@create')->name('category.show
 Route::post('/category', 'CategoryController@store')->name('category.store');
 
 Route::get('/category/list', 'CategoryController@index')->name('category.list');
+
+Route::delete('/category/delete/{id}', 'CategoryController@destroy')->name('category.delete');

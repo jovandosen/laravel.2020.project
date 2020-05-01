@@ -71,4 +71,27 @@ class CategoryController extends Controller
     	$categories = Category::all();
     	return View::make('category.categories', ['categories' => $categories]);
     }
+
+    /**
+     * Delete Category record
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+    	$categoryID = (int) $id;
+
+    	$category = Category::find($categoryID);
+
+    	Gate::authorize('delete-category', $category);
+
+    	$category->delete();
+
+    	$request->session()->flash('categoryDeleted', 'You have successfully deleted Category.');
+
+        return redirect()->route('category.list');
+    }
 }

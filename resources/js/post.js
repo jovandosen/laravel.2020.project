@@ -113,3 +113,10 @@ window.confirmGenreUpdate = function(){
 	$("#genreModal").modal('toggle');
     $("#update-genre-form").submit();
 }
+
+window.confirmCategoryActionYes = function(that){
+	var el = that;
+	var formID = el.dataset.send;
+	$("#categoryModal").modal('toggle');
+	$("#" + formID).submit();
+}
