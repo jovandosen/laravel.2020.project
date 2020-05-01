@@ -84,3 +84,9 @@ Route::delete('/genre/delete/{id}', 'GenreController@destroy')->name('genre.dele
 Route::get('/genre/edit/{id}', 'GenreController@edit')->name('genre.edit');
 
 Route::patch('/genre/update/{id}', 'GenreController@update')->name('genre.update');
+
+// Artisan command routes
+
+Route::get('/foo/example', function(){
+	$command = Artisan::call('foo:example', ['name' => 'Foo']);
+});
