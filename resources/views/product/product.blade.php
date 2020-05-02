@@ -4,6 +4,15 @@
 
 @section('content')
 <div class="container">
+	@if( session()->has('productCreated') )
+		<div class="row justify-content-center" id="flash-message-box">
+			<div class="col-md-8">
+				<div class="alert alert-success" role="alert" id="flash-message-content">
+					{{ session()->get('productCreated') }}
+				</div>
+			</div>	
+		</div>	
+	@endif
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 			
@@ -38,7 +47,7 @@
 						
 						<div class="form-group">
 							<label for="price">Price</label>
-							<input type="number" name="price" id="price" placeholder="Product Price..." autocomplete="off" class="form-control @if( $errors->has('price') ) field-error @endif" aria-describedby="priceHelp" value="{{ old('price') }}">
+							<input type="number" name="price" id="price" placeholder="Product Price..." autocomplete="off" class="form-control @if( $errors->has('price') ) field-error @endif" aria-describedby="priceHelp" value="{{ old('price') }}" min="1">
 							<small id="priceHelp" class="form-text text-muted">
 								@if( $errors->has('price') )
 									<font color="red">{{ $errors->first('price') }}</font>
@@ -53,7 +62,7 @@
 						
 						<div class="form-group">
 							<label for="quantity">Quantity</label>
-							<input type="number" name="quantity" id="quantity" placeholder="Product Quantity..." autocomplete="off" class="form-control @if( $errors->has('quantity') ) field-error @endif" aria-describedby="quantityHelp" value="{{ old('quantity') }}">
+							<input type="number" name="quantity" id="quantity" placeholder="Product Quantity..." autocomplete="off" class="form-control @if( $errors->has('quantity') ) field-error @endif" aria-describedby="quantityHelp" value="{{ old('quantity') }}" min="0">
 							<small id="quantityHelp" class="form-text text-muted">
 								@if( $errors->has('quantity') )
 									<font color="red">{{ $errors->first('quantity') }}</font>

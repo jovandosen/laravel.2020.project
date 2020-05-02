@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use View;
 use Log;
 use Auth;
+use Gate;
+use App\Http\Requests\ProductRequest;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -26,23 +29,52 @@ class ProductController extends Controller
      */
     public function create()
     {
+    	Gate::authorize('create-product');
     	return View::make('product.product');
     }
 
     /**
      * Store a newly created Product
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProductRequest  $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-    	$validatedData = $request->validate([
-    		'name' => "required|string|max:255|unique:products",
-    		'manufacturer' => "required|max:255|string",
-    		'price' => "required|integer|min:1",
-    		'quantity' => "required|integer|min:0"
+    	$userID = $request->input('userID');
+    	$productName = $request->input('name');
+    	$productManufacturer = $request->input('manufacturer');
+    	$productPrice = $request->input('price');
+    	$productQuantity = $request->input('quantity');
+    	$productDescription = $request->input('description');
+    	$productImages = $request->file('images');
+
+    	$userID = (int) $userID;
+    	$productPrice = (int) $productPrice;
+    	$productQuantity = (int) $productQuantity;
+
+    	if( !empty($productImages) ){
+    		// store images
+    	} else {
+    		$productImages = '';
+    	}
+
+    	$product = Product::create([
+    		'user_id' => $userID,
+    		'name' => $productName,
+    		'manufacturer' => $productManufacturer,
+    		'price' => $productPrice,
+    		'quantity' => $productQuantity,
+    		'description' => $productDescription,
+    		'images' => $productImages
     	]);
+
+    	if( $product ){
+    		Log::info('New Product Created.');
+    		$request->session()->flash('productCreated', 'You have successfully created Product.');
+    		return redirect()->route('product.show');
+    	}
+
     }
 }

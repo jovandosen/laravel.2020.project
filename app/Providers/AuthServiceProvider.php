@@ -83,5 +83,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('update-category', function ($user, $category) {
             return $user->id === $category->user_id;
         });
+
+        // Product Gates
+
+        Gate::define('create-product', function ($user) {
+            return $user->admin;
+        });
     }
 }
