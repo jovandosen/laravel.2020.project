@@ -37375,6 +37375,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 __webpack_require__(/*! ./post */ "./resources/js/post.js");
 
+__webpack_require__(/*! ./product */ "./resources/js/product.js");
+
 /***/ }),
 
 /***/ "./resources/js/post.js":
@@ -37509,6 +37511,25 @@ window.confirmCategoryActionYes = function (that) {
 window.confirmCategoryUpdate = function () {
   $("#categoryModal").modal('toggle');
   $("#update-category-form").submit();
+};
+
+/***/ }),
+
+/***/ "./resources/js/product.js":
+/*!*********************************!*\
+  !*** ./resources/js/product.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {//
+});
+
+window.deleteProduct = function (that) {
+  var el = that;
+  var formID = el.dataset.send;
+  $("#productModal").modal('toggle');
+  $("#" + formID).submit();
 };
 
 /***/ }),

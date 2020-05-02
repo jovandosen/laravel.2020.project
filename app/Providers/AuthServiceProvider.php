@@ -89,5 +89,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-product', function ($user) {
             return $user->admin;
         });
+
+        Gate::define('delete-product', function ($user, $product) {
+            return $user->id === $product->user_id;
+        });
     }
 }

@@ -117,4 +117,39 @@ class ProductController extends Controller
     	$products = Product::all();
     	return View::make('product.products', ['products' => $products]);
     }
+
+    /**
+     * Delete Product
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+    	$productID = (int) $id;
+
+    	$product = Product::find($productID);
+
+    	$productDir = $product->name;
+
+    	Gate::authorize('delete-product', $product);
+
+    	$imagesToDelete = glob( public_path("/images/products/$productDir/") . "*.*" );
+
+    	foreach ($imagesToDelete as $key => $value) {
+    		unlink($value);
+    	}
+
+    	$product->delete();
+
+    	if( file_exists( public_path("/images/products/$productDir") ) ){
+    		rmdir( public_path("/images/products/$productDir") );
+    	}
+
+    	$request->session()->flash('productDeleted', 'You have successfully deleted Product.');
+
+        return redirect()->route('product.list');
+    }
 }
