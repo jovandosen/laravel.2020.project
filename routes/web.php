@@ -132,3 +132,9 @@ Route::delete('/category/delete/{id}', 'CategoryController@destroy')->name('cate
 Route::get('/category/edit/{id}', 'CategoryController@edit')->name('category.edit');
 
 Route::patch('/category/update/{id}', 'CategoryController@update')->name('category.update');
+
+// Product routes
+
+Route::get('/product/create', 'ProductController@create')->name('product.show');
+
+Route::post('/product', 'ProductController@store')->name('product.store');
