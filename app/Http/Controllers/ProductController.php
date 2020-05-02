@@ -56,6 +56,35 @@ class ProductController extends Controller
 
     	if( !empty($productImages) ){
     		// store images
+
+    		$dir = mkdir( public_path("/images/products/$productName") );
+
+    		$productImgList = [];
+
+    		foreach( $productImages as $image ){
+    			if( $image->isValid() ){
+    				$imageName = $image->getClientOriginalName();
+    				$imageExtension = $image->extension();
+    				$imagePath = $image->path();
+
+    				if( file_exists( public_path("/images/products/$productName/" . $imageName) ) ){
+
+    					$random = rand(1, 10000);
+                    	$imgName = pathinfo($imageName, PATHINFO_FILENAME);
+                    	$img = $imgName . $random . '.' . $imageExtension;
+
+                    	$storeImage = $image->move( public_path("/images/products/$productName/"), $img );
+                    	$productImgList[] = $img;
+
+    				} else {
+    					$storeImage = $image->move( public_path("/images/products/$productName/"), $imageName );
+    					$productImgList[] = $imageName;
+    				}
+    			}
+    		}
+
+    		$productImages = serialize($productImgList);
+
     	} else {
     		$productImages = '';
     	}
