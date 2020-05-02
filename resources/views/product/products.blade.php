@@ -35,7 +35,13 @@
   							<td>{{ $product->manufacturer }}</td>
   							<td>{{ $product->price }}</td>
   							<td>{{ $product->quantity }}</td>
-  							<td>{{ $product->description }}</td>
+  							<td>
+  								@if( !empty($product->description) )
+  									{{ $product->description }}
+  								@else
+  									<i>{{ __('No Description') }}</i>
+  								@endif
+  							</td>
   							<td>{{ $product->created_at->diffForHumans() }}</td>
   							<td><a href="#">edit</a></td>
   							<td>
