@@ -138,3 +138,5 @@ Route::patch('/category/update/{id}', 'CategoryController@update')->name('catego
 Route::get('/product/create', 'ProductController@create')->name('product.show');
 
 Route::post('/product', 'ProductController@store')->name('product.store');
+
+Route::get('/product/list', 'ProductController@index')->name('product.list');

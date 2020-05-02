@@ -106,4 +106,15 @@ class ProductController extends Controller
     	}
 
     }
+
+    /**
+     * Display Product List
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+    	$products = Product::all();
+    	return View::make('product.products', ['products' => $products]);
+    }
 }
