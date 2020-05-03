@@ -8,3 +8,8 @@ window.deleteProduct = function(that){
 	$("#productModal").modal('toggle');
 	$("#" + formID).submit();
 }
+
+window.confirmProductUpdate = function(){
+	$("#productModal").modal('toggle');
+	$("#update-product-form").submit();
+}

@@ -37532,6 +37532,11 @@ window.deleteProduct = function (that) {
   $("#" + formID).submit();
 };
 
+window.confirmProductUpdate = function () {
+  $("#productModal").modal('toggle');
+  $("#update-product-form").submit();
+};
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":

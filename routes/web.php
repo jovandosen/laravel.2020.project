@@ -142,3 +142,7 @@ Route::post('/product', 'ProductController@store')->name('product.store');
 Route::get('/product/list', 'ProductController@index')->name('product.list');
 
 Route::delete('/product/delete/{id}', 'ProductController@destroy')->name('product.delete');
+
+Route::get('/product/edit/{id}', 'ProductController@edit')->name('product.edit');
+
+Route::patch('/product/update/{id}', 'ProductController@update')->name('product.update');

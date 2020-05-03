@@ -43,7 +43,7 @@
   								@endif
   							</td>
   							<td>{{ $product->created_at->diffForHumans() }}</td>
-  							<td><a href="#">edit</a></td>
+  							<td><a class="btn btn-sm btn-primary" href="{{ route('product.edit', ['id' => $product->id]) }}">{{ __('EDIT') }}</a></td>
   							<td>
   								<form method="POST" action="{{ route('product.delete', ['id' => $product->id]) }}" id="delete-product-form-{{ $product->id }}">
   									<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#productModal" id="delete-product-{{ $product->id }}" onclick="confirmAction(this)">{{ __('DELETE') }}</button>

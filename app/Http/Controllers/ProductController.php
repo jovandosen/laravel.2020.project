@@ -154,4 +154,77 @@ class ProductController extends Controller
 
         return redirect()->route('product.list');
     }
+
+    /**
+     * Show form for editing Product
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $productID = (int) $id;
+
+        $product = Product::find($productID);
+
+        if( !empty($product->images) ){
+            $productImages = unserialize($product->images);
+        } else {
+            $productImages = [];
+        }
+
+        return view('product.edit_product', ['product' => $product, 'productImages' => $productImages]);
+    }
+
+    /**
+     * Update Product
+     *
+     * @param  App\Http\Requests\ProductRequest  $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ProductRequest $request, $id)
+    {
+        $productID = (int) $id;
+
+        $product = Product::find($productID);
+
+        Gate::authorize('update-product', $product);
+
+        $userID = $request->input('userID');
+        $productName = $request->input('name');
+        $productManufacturer = $request->input('manufacturer');
+        $productPrice = $request->input('price');
+        $productQuantity = $request->input('quantity');
+        $productDescription = $request->input('description');
+        $productImages = $request->input('productImageList');
+
+        $userID = (int) $userID;
+        $productPrice = (int) $productPrice;
+        $productQuantity = (int) $productQuantity;
+
+        $productOldDir = public_path("/images/products/$product->name");
+
+        $updatedAt = date("Y-m-d h:i:sa");
+
+        $product->name = $productName;
+        $product->manufacturer = $productManufacturer;
+        $product->price = $productPrice;
+        $product->quantity = $productQuantity;
+        $product->description = $productDescription;
+        $product->updated_at = $updatedAt;
+        $product->images = $productImages;
+
+        if( file_exists( $productOldDir ) ){
+            rename($productOldDir, public_path("/images/products/$productName") );
+        }
+
+        $product->save();
+
+        $request->session()->flash('productUpdated', 'You have successfully updated Product.');
+
+        return redirect()->route('product.edit', ['id' => $productID]);
+    }
 }
