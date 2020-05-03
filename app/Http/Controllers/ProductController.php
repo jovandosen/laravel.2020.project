@@ -9,6 +9,7 @@ use Auth;
 use Gate;
 use App\Http\Requests\ProductRequest;
 use App\Product;
+use App\Events\ProductCreated;
 
 class ProductController extends Controller
 {
@@ -100,6 +101,7 @@ class ProductController extends Controller
     	]);
 
     	if( $product ){
+            event(new ProductCreated($product));
     		Log::info('New Product Created.');
     		$request->session()->flash('productCreated', 'You have successfully created Product.');
     		return redirect()->route('product.show');
