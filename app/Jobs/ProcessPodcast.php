@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Log;
 
 class ProcessPodcast implements ShouldQueue
 {
@@ -29,6 +30,6 @@ class ProcessPodcast implements ShouldQueue
      */
     public function handle()
     {
-        //
+        Log::info('JOB WORKS WELL AND GOOD.');
     }
 }
