@@ -202,6 +202,59 @@ class ProductController extends Controller
         $productQuantity = $request->input('quantity');
         $productDescription = $request->input('description');
         $productImages = $request->input('productImageList');
+        $removedProductImages = $request->input('removedProductImages');
+        $uploadedImages = $request->file('images');
+
+        if( !empty($removedProductImages) ){
+
+            $removedProductImages = json_decode($removedProductImages);
+            $productImages = unserialize($productImages);
+
+            $arrayDiff = array_diff($productImages, $removedProductImages);
+
+            $productImages = serialize($arrayDiff);
+
+            foreach( $removedProductImages as $k => $v ){
+                if( file_exists( public_path("/images/products/$product->name/" . $v) ) ){
+                    unlink( public_path("/images/products/$product->name/" . $v) );
+                }
+            }
+
+        }
+
+        if( !empty($uploadedImages) ){
+
+            $productImages = unserialize($productImages);
+
+            foreach( $uploadedImages as $img ){
+                if( $img->isValid() ){
+
+                    $imgName = $img->getClientOriginalName();
+                    $imgExtension = $img->extension();
+                    $imgPath = $img->path();
+
+                    if( file_exists( public_path("/images/products/$product->name/" . $imgName) ) ){
+
+                        $random = rand(1, 10000);
+                        $imageName = pathinfo($imgName, PATHINFO_FILENAME);
+                        $imgData = $imageName . $random . '.' . $imgExtension;
+
+                        $storeImg = $img->move( public_path("/images/products/$product->name/"), $imgData );
+                        $productImages[] = $imgData;
+
+                    } else {
+
+                        $storeImg = $img->move( public_path("/images/products/$product->name/"), $imgName );
+                        $productImages[] = $imgName;
+
+                    }
+
+                }
+            }
+
+            $productImages = serialize($productImages);
+
+        }
 
         $userID = (int) $userID;
         $productPrice = (int) $productPrice;

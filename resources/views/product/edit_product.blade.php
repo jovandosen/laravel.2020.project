@@ -97,6 +97,7 @@
 								
 								<div class="col-6 add-space">
 									<img src='{{ asset("/images/products/$product->name/$productImg") }}' class="img-fluid" id="{{ $productImg }}">
+									<a href="javascript:void(0)" onclick="removeProductImage(this)" class="product-img-link">{{ __('remove') }}</a>
 								</div>
 								
 							@endforeach
@@ -106,6 +107,7 @@
 
 				<input type="hidden" name="userID" id="userID" value="{{ Auth::user()->id }}">
 				<input type="hidden" name="productImageList" id="productImageList" value="{{ $product->images }}">
+				<input type="hidden" name="removedProductImages" id="removedProductImages" value="">
 
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal">{{ __('UPDATE PRODUCT') }}</button>
 				@csrf
