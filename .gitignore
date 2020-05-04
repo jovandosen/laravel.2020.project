@@ -12,3 +12,4 @@ npm-debug.log
 yarn-error.log
 /public/images
 /sql_backup
+/public/cron-log.txt
