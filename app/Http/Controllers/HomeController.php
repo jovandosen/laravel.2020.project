@@ -34,12 +34,12 @@ class HomeController extends Controller
             $movies = DB::table('movies')
                                     ->where('title', 'like', "%$search%")
                                     ->orWhere('description', 'like', "%$search%")
-                                    ->get();                     
+                                    ->paginate(3);                    
 
             return view('home', ['movies' => $movies]);
 
         } else {
-            $movies = Movie::all();
+            $movies = Movie::paginate(5);
             return view('home', ['movies' => $movies]);
         }
     }

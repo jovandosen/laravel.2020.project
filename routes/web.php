@@ -158,3 +158,7 @@ Route::get('/add/user', 'TestController@insertUser')->name('add.user');
 Route::get('/update/user', 'TestController@updateUser')->name('update.user');
 
 Route::get('/delete/user', 'TestController@deleteUser')->name('delete.user');
+
+// Pagination routes
+
+Route::get('/paginate/users', 'TestController@paginateUsers')->name('paginate.users');

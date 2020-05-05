@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\Foo;
 use Psr\Container\ContainerInterface;
 use DB;
+use App\User;
 
 class TestController extends Controller
 {
@@ -107,5 +108,15 @@ class TestController extends Controller
     public function deleteUser()
     {
         $user = DB::delete('delete from users where id = ?', [26]);
+    }
+
+    /**
+     * Display json and paginated User data
+     *
+     * @return json
+     */
+    public function paginateUsers()
+    {
+        return User::paginate();
     }
 }

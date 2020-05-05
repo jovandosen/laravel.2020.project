@@ -45,6 +45,12 @@
                 </div>
             @endforeach
 
+            <div class="col-md-10">
+                <div class="row justify-content-center">
+                    {{ $movies->withQueryString()->links() }}
+                </div>
+            </div>
+
         @else
             <div class="col-md-10 move-box">
                 <h4>No results.</h4>
