@@ -146,3 +146,15 @@ Route::delete('/product/delete/{id}', 'ProductController@destroy')->name('produc
 Route::get('/product/edit/{id}', 'ProductController@edit')->name('product.edit');
 
 Route::patch('/product/update/{id}', 'ProductController@update')->name('product.update');
+
+// SQL routes
+
+Route::get('/user/list', 'TestController@users')->name('user.list');
+
+Route::get('/user/details', 'TestController@singleUser')->name('single.user');
+
+Route::get('/add/user', 'TestController@insertUser')->name('add.user');
+
+Route::get('/update/user', 'TestController@updateUser')->name('update.user');
+
+Route::get('/delete/user', 'TestController@deleteUser')->name('delete.user');

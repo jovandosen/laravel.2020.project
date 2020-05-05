@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\Foo;
 use Psr\Container\ContainerInterface;
+use DB;
 
 class TestController extends Controller
 {
@@ -50,5 +51,61 @@ class TestController extends Controller
     {
         $testService = $container->get('test');
         echo $testService->test();
+    }
+
+    /**
+     * User List
+     *
+     * @return array | json
+     */
+    public function users()
+    {
+        $users = DB::select('select * from users');
+
+        return $users;
+    }
+
+    /**
+     * Specific User
+     *
+     * @return array | json
+     */
+    public function singleUser()
+    {
+        // $user = DB::select('select * from users where id = ?', [2]);
+
+        $user = DB::select('select * from users where id = :id', ['id' => 2]); // named binding
+
+        return $user;
+    }
+
+    /**
+     * Insert User
+     *
+     * @return void
+     */
+    public function insertUser()
+    {
+        $user = DB::insert('insert into users (name, email, password) values (?, ?, ?)', ['Test', 'test@gmail.com', 'test123456']);
+    }
+
+    /**
+     * Update User
+     *
+     * @return void
+     */
+    public function updateUser()
+    {
+        $user = DB::update('update users set name = ? where id = ?', ['NewUserName', 26]);
+    }
+
+    /**
+     * Delete User
+     *
+     * @return void
+     */
+    public function deleteUser()
+    {
+        $user = DB::delete('delete from users where id = ?', [26]);
     }
 }
