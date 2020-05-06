@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redis;
 
 /*
 |--------------------------------------------------------------------------
@@ -162,3 +163,26 @@ Route::get('/delete/user', 'TestController@deleteUser')->name('delete.user');
 // Pagination routes
 
 Route::get('/paginate/users', 'TestController@paginateUsers')->name('paginate.users');
+
+// Redis routes
+
+Route::get('/redis/set', function(){
+
+	$redis = Redis::connection();
+
+	$redis->set('user_details', json_encode([
+		'first_name' => 'Damjan',
+		'last_name' => 'Dosen'
+	]));
+
+});
+
+Route::get('/redis/get', function(){
+
+	$redis = Redis::connection();
+
+	$response = $redis->get('user_details');
+
+	$response = json_decode($response);
+
+});
