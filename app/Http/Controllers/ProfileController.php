@@ -7,6 +7,8 @@ use Auth;
 use View;
 use App\User;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\PhoneNumberRequest;
+use App\Phone;
 
 class ProfileController extends Controller
 {
@@ -106,5 +108,37 @@ class ProfileController extends Controller
 
         return redirect()->route('profile');
 
+    }
+
+    /**
+     * Display form for Phone Number
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function phone()
+    {
+        return View::make('profile.phone_number');
+    }
+
+    /**
+     * Store phone number in database
+     *
+     * @param  \App\Http\Requests\PhoneNumberRequest  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function storePhoneNumber(PhoneNumberRequest $request)
+    {
+        // $phoneRecord = new Phone(['user_id' => Auth::user()->id, 'phone' => $request->input('phone')]);
+
+        $phoneRecord = new Phone(['phone' => $request->input('phone')]);
+
+        $user = Auth::user();
+
+        $user->phone()->save($phoneRecord);
+
+        $request->session()->flash('phoneNumberCreated', 'You have successfully added Phone Number.');
+
+        return redirect()->route('phone.number');
     }
 }

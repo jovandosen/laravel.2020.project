@@ -72,6 +72,10 @@ Route::get('/profile', 'ProfileController@profile')->name('profile');
 
 Route::patch('/profile/update/{id}', 'ProfileController@update')->name('profile.update');
 
+Route::get('/phone/create', 'ProfileController@phone')->name('phone.number');
+
+Route::post('/phone/store', 'ProfileController@storePhoneNumber')->name('store.phone.number');
+
 // Movie Genre routes
 
 Route::get('/genre/create', 'GenreController@create')->name('genre.show');
