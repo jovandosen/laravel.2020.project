@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '| Add Phone Number')
+@section('title', $data['title'])
 
 @section('content')
 <div class="container">
@@ -13,12 +13,21 @@
 			</div>	
 		</div>	
 	@endif
+	@if( session()->has('phoneNumberUpdated') )
+		<div class="row justify-content-center" id="flash-message-box">
+			<div class="col-md-8">
+				<div class="alert alert-success" role="alert" id="flash-message-content">
+					{{ session()->get('phoneNumberUpdated') }}
+				</div>
+			</div>	
+		</div>	
+	@endif
 	<div class="row justify-content-center">
 		<div class="col-md-8">		
-			<form method="POST" action="{{ route('store.phone.number') }}">
+			<form method="POST" action="{{ $data['action'] }}">
 				<div class="form-group">
 					<label for="phone">Phone Number</label>
-					<input type="text" name="phone" id="phone" autocomplete="off" class="form-control @if( $errors->has('phone') ) field-error @endif" placeholder="Phone Number..." aria-describedby="phoneHelp" maxlength="255" minlength="6" value="{{ old('phone') }}">
+					<input type="text" name="phone" id="phone" autocomplete="off" class="form-control @if( $errors->has('phone') ) field-error @endif" placeholder="Phone Number..." aria-describedby="phoneHelp" maxlength="255" minlength="6" value="@if(!empty($data['userPhoneNumber'])) {{ $data['userPhoneNumber'] }} @else{{ old('phone') }}@endif">
 					<small class="form-text text-muted" id="phoneHelp">
 						@if( $errors->has('phone') )
 							<font color="red">{{ $errors->first('phone') }}</font>
@@ -27,8 +36,11 @@
 						@endif
 					</small>
 				</div>
-				<button type="submit" class="btn btn-primary">{{ __('ADD PHONE NUMBER') }}</button>
+				<button type="submit" class="btn btn-primary">{{ $data['button'] }}</button>
 				@csrf
+				@if( !empty($data['userPhoneNumber']) )
+					@method('PATCH')
+				@endif
 			</form>
 		</div>
 	</div>

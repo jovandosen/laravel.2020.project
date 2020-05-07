@@ -117,7 +117,39 @@ class ProfileController extends Controller
      */
     public function phone()
     {
-        return View::make('profile.phone_number');
+        $user = Auth::user()->phone;
+
+        $phoneData = Phone::where("user_id", Auth::user()->id)->first();
+
+        if( $phoneData ){
+            $phoneID = $phoneData->id;
+        } else {
+            $phoneID = 0;
+        }
+
+        $data = [];
+        
+        if( !empty($user->phone) ){
+            $userPhoneNumber = $user->phone;
+            $title = '| Update Phone Number';
+            $button = 'EDIT PHONE NUMBER';
+            $action = route('update.phone.number', ['id' => $phoneID]);
+            $data['userPhoneNumber'] = $userPhoneNumber;
+            $data['title'] = $title;
+            $data['button'] = $button;
+            $data['action'] = $action;
+        } else {
+            $userPhoneNumber = '';
+            $title = '| Add Phone Number';
+            $button = 'ADD PHONE NUMBER';
+            $action = route('store.phone.number');
+            $data['userPhoneNumber'] = $userPhoneNumber;
+            $data['title'] = $title;
+            $data['button'] = $button;
+            $data['action'] = $action;
+        }
+
+        return View::make('profile.phone_number', ['data' => $data]);
     }
 
     /**
@@ -138,6 +170,28 @@ class ProfileController extends Controller
         $user->phone()->save($phoneRecord);
 
         $request->session()->flash('phoneNumberCreated', 'You have successfully added Phone Number.');
+
+        return redirect()->route('phone.number');
+    }
+
+    /**
+     * Update Phone Number
+     *
+     * @param  \App\Http\Requests\PhoneNumberRequest  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePhoneNumber(PhoneNumberRequest $request, $id)
+    {
+        $phoneID = (int) $id;
+
+        $phone = Phone::find($phoneID);
+
+        $phone->phone = $request->input('phone');
+
+        $phone->save();
+
+        $request->session()->flash('phoneNumberUpdated', 'You have successfully updated Phone Number.');
 
         return redirect()->route('phone.number');
     }
