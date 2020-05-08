@@ -44,7 +44,7 @@ class ExampleTest extends TestCase
 
         // $response->dump();
 
-        $response->assertStatus(200);
+        $response->assertStatus(200)->assertSessionHas('aaa', 'bbb'); // works well
     }
 
     /**
