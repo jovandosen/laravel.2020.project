@@ -125,3 +125,8 @@ window.confirmCategoryUpdate = function(){
 	$("#categoryModal").modal('toggle');
     $("#update-category-form").submit();
 }
+
+window.confirmPhoneNumberDelete = function(){
+	$("#phoneNumberModal").modal('toggle');
+    $("#delete-phone-number").submit();
+}

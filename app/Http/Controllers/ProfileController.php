@@ -138,6 +138,7 @@ class ProfileController extends Controller
             $data['title'] = $title;
             $data['button'] = $button;
             $data['action'] = $action;
+            $data['id'] = $phoneID;
         } else {
             $userPhoneNumber = '';
             $title = '| Add Phone Number';
@@ -178,6 +179,7 @@ class ProfileController extends Controller
      * Update Phone Number
      *
      * @param  \App\Http\Requests\PhoneNumberRequest  $request
+     * @param  int  $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -192,6 +194,27 @@ class ProfileController extends Controller
         $phone->save();
 
         $request->session()->flash('phoneNumberUpdated', 'You have successfully updated Phone Number.');
+
+        return redirect()->route('phone.number');
+    }
+
+    /**
+     * Delete Phone Number
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deletePhoneNumber(Request $request, $id)
+    {
+        $phoneID = (int) $id;
+
+        $phone = Phone::find($phoneID);
+
+        $phone->delete();
+
+        $request->session()->flash('phoneNumberDeleted', 'You have successfully deleted Phone Number.');
 
         return redirect()->route('phone.number');
     }

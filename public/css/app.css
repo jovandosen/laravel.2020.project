@@ -10903,6 +10903,10 @@ a.text-dark:focus {
   margin-bottom: 40px;
 }
 
+#delete-phone-number-btn {
+  margin-top: 10px;
+}
+
 .add-space {
   margin-bottom: 5px;
 }

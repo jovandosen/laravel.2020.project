@@ -37513,6 +37513,11 @@ window.confirmCategoryUpdate = function () {
   $("#update-category-form").submit();
 };
 
+window.confirmPhoneNumberDelete = function () {
+  $("#phoneNumberModal").modal('toggle');
+  $("#delete-phone-number").submit();
+};
+
 /***/ }),
 
 /***/ "./resources/js/product.js":

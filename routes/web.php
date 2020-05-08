@@ -84,6 +84,8 @@ Route::post('/phone/store', 'ProfileController@storePhoneNumber')->name('store.p
 
 Route::patch('/phone/update/{id}', 'ProfileController@updatePhoneNumber')->name('update.phone.number');
 
+Route::delete('/phone/delete/{id}', 'ProfileController@deletePhoneNumber')->name('delete.phone.number');
+
 // Movie Genre routes
 
 Route::get('/genre/create', 'GenreController@create')->name('genre.show');
