@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redis;
+use App\Http\Resources\User as UserResource;
+use App\User;
+use App\Http\Resources\Post as PostResource;
+use App\Post;
+use App\Http\Resources\Movie as MovieResource;
+use App\Movie;
 
 /*
 |--------------------------------------------------------------------------
@@ -191,4 +197,18 @@ Route::get('/redis/get', function(){
 
 	$response = json_decode($response);
 
+});
+
+// Resources routes
+
+Route::get('/resource/user', function () {
+    return new UserResource(User::find([1, 2, 25, 37]));
+});
+
+Route::get('/resource/post', function () {
+    return PostResource::collection(Post::all());
+});
+
+Route::get('/resource/movie', function () {
+    return MovieResource::collection(Movie::all());
 });
