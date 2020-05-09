@@ -39,8 +39,10 @@ class TestController extends Controller
      */
     public function baz(ContainerInterface $container)
     {
-        $bazService = $container->get('baz');
-        echo $bazService->baz(1, 'Dadada');
+        /*$bazService = $container->get('baz');
+        echo $bazService->baz(1, 'Dadada');*/
+        $user = User::find(1);
+        return $user;
     }
 
     /**
