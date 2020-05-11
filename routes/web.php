@@ -8,6 +8,7 @@ use App\Http\Resources\Post as PostResource;
 use App\Post;
 use App\Http\Resources\Movie as MovieResource;
 use App\Movie;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -213,4 +214,18 @@ Route::get('/resource/post', function () {
 
 Route::get('/resource/movie', function () {
     return MovieResource::collection(Movie::all());
+});
+
+// Sanctum routes
+
+Route::get('/sanctum/test', function(Request $request){
+
+	$user = User::where("email", "jovan@gmail.com")->first();
+	return $user->createToken('token-name', ['server:update'])->plainTextToken;
+		
+	// Example tokens created by Sanctum
+
+	// 1|nvZbbyFaCzshQlMIidqT1jHDOzXhXBDX7P9cie8vUXHAvJYfK6avqvMiehuWdmu9vgO5X6debJyKGBLv
+	// 2|rcD2NzXCnRkjoYaFqpHgWD0ZKZwEeEjDocRaxs9TwHFtoA4YtLotHLdeM06PBsvVU6lQuB6lb99E6XBE
+	// 3|KlQEuUOKVnIkKu4uHbgwEEZDfYIRauhDiCsEF89xSkXD7HzRSBScCpVHVxe5YKQcUDUiFl3wMJPNgEZ5
 });
