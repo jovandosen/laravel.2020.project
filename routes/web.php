@@ -229,3 +229,15 @@ Route::get('/sanctum/test', function(Request $request){
 	// 2|rcD2NzXCnRkjoYaFqpHgWD0ZKZwEeEjDocRaxs9TwHFtoA4YtLotHLdeM06PBsvVU6lQuB6lb99E6XBE
 	// 3|KlQEuUOKVnIkKu4uHbgwEEZDfYIRauhDiCsEF89xSkXD7HzRSBScCpVHVxe5YKQcUDUiFl3wMJPNgEZ5
 });
+
+// Scount routes
+
+Route::get('/scout/post/test', function(Request $request){
+	$posts = Post::search('Dev')->get();
+	return $posts;
+});
+
+Route::get('/scout/user/test', function(Request $request){
+	$users = User::search('jovan')->get();
+	return $users;
+});
