@@ -241,3 +241,9 @@ Route::get('/scout/user/test', function(Request $request){
 	$users = User::search('jovan')->get();
 	return $users;
 });
+
+// Github login routes
+
+Route::get('login/github', 'Auth\LoginController@redirectToProvider');
+
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
