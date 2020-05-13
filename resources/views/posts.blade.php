@@ -29,10 +29,34 @@
   				<tbody>
 					@foreach( $posts as $post )
 						<tr>
-							<td>{{ $post->title }}</td>
-							<td>{{ $post->excerpt }}</td>
-							<td>{{ $post->content }}</td>
-							<td>{{ $post->created_at->diffForHumans() }}</td>
+							<td>
+								@if( $post->title )
+									{{ $post->title }}
+								@else
+									<i>{{ __('No Title') }}</i>	
+								@endif
+							</td>
+							<td>
+								@if( $post->excerpt )
+									{{ $post->excerpt }}
+								@else
+									<i>{{ __('No Excerpt') }}</i>	
+								@endif
+							</td>
+							<td>
+								@if( $post->content )
+									{{ $post->content }}
+								@else
+									<i>{{ __('No Content') }}</i>	
+								@endif
+							</td>
+							<td>
+								@if( $post->created_at )
+									{{ $post->created_at->diffForHumans() }}
+								@else
+									<i>{{ __('No Created At Detail') }}</i>
+								@endif
+							</td>
 							<td>
 								<a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-sm btn-primary">{{ __('EDIT') }}</a>
 							</td>

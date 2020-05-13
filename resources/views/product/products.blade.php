@@ -31,10 +31,34 @@
   				<tbody>
   					@foreach( $products as $product )
   						<tr>
-  							<td>{{ $product->name }}</td>
-  							<td>{{ $product->manufacturer }}</td>
-  							<td>{{ $product->price }}</td>
-  							<td>{{ $product->quantity }}</td>
+  							<td>
+  								@if( $product->name )
+  									{{ $product->name }}
+  								@else
+  									<i>{{ __('No Name') }}</i>	
+  								@endif
+  							</td>
+  							<td>
+  								@if( $product->manufacturer )
+  									{{ $product->manufacturer }}
+  								@else
+  									<i>{{ __('No Manufacturer') }}</i>	
+  								@endif
+  							</td>
+  							<td>
+  								@if( $product->price )
+  									{{ $product->price }}
+  								@else
+  									<i>{{ __('No Price') }}</i>	
+  								@endif
+  							</td>
+  							<td>
+  								@if( $product->quantity )
+  									{{ $product->quantity }}
+  								@else
+  									<i>{{ __('No Quantity') }}</i>	
+  								@endif
+  							</td>
   							<td>
   								@if( !empty($product->description) )
   									{{ $product->description }}

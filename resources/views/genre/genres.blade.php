@@ -33,10 +33,34 @@
   							$genreAuthorName = $genreAuthor->name;
   						@endphp
   						<tr>
-  							<td>{{ $genre->name }}</td>
-  							<td>{{ $genre->description }}</td>
-  							<td>{{ $genreAuthorName }}</td>
-  							<td>{{ $genre->created_at->diffForHumans() }}</td>
+  							<td>
+  								@if( $genre->name )
+  									{{ $genre->name }}
+  								@else
+  									<i>{{ __('No Name') }}</i>	
+  								@endif
+  							</td>
+  							<td>
+  								@if( $genre->description )
+  									{{ $genre->description }}
+  								@else
+  									<i>{{ __('No Description') }}</i>	
+  								@endif
+  							</td>
+  							<td>
+  								@if( $genreAuthorName )
+  									{{ $genreAuthorName }}
+  								@else
+  									<i>{{ __('No Author') }}</i>	
+  								@endif
+  							</td>
+  							<td>
+  								@if( $genre->created_at )
+  									{{ $genre->created_at->diffForHumans() }}
+  								@else 
+  									<i>{{ __('No Created At Detail') }}</i>	
+  								@endif
+  							</td>
   							<td><a href="{{ route('genre.edit', ['id' => $genre->id]) }}" class="btn btn-sm btn-primary">{{ __('Edit') }}</a></td>
   							<td>
   								<form method="POST" action="{{ route('genre.delete', ['id' => $genre->id]) }}" id="delete-genre-form-{{ $genre->id }}">

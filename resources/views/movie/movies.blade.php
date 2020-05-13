@@ -28,9 +28,27 @@
   				<tbody>
   					@foreach( $movies as $movie )
   						<tr>
-  							<td>{{ $movie->title }}</td>
-  							<td>{{ $movie->description }}</td>
-  							<td>{{ $movie->created_at->diffForHumans() }}</td>
+  							<td>
+  								@if( $movie->title )
+  									{{ $movie->title }}
+  								@else
+  									<i>{{ __('No Title') }}</i>	
+  								@endif
+  							</td>
+  							<td>
+  								@if( $movie->description )
+  									{{ $movie->description }}
+  								@else
+  									<i>{{ __('No Description') }}</i>	
+  								@endif
+  							</td>
+  							<td>
+  								@if( $movie->created_at )
+  									{{ $movie->created_at->diffForHumans() }}
+  								@else
+  									<i>{{ __('No Created At Detail') }}</i>	
+  								@endif
+  							</td>
   							<td><a class="btn btn-sm btn-primary" href="{{ route('movie.edit', ['id' => $movie->id]) }}">{{ __('EDIT') }}</a></td>
   							<td>
   								<form method="POST" action="{{ route('movie.delete', ['id' => $movie->id]) }}" id="delete-movie-form-{{ $movie->id }}">

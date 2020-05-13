@@ -34,10 +34,34 @@
   							$categoryAuthorName = $categoryAuthor->name;
   						@endphp
   						<tr>
-  							<td>{{ $category->name }}</td>
-  							<td>{{ $category->description }}</td>
-  							<td>{{ $categoryAuthorName }}</td>
-  							<td>{{ $category->created_at->diffForHumans() }}</td>
+  							<td>
+  								@if( $category->name )
+  									{{ $category->name }}
+  								@else
+  									<i>{{ __('No Name') }}</i>	
+  								@endif
+  							</td>
+  							<td>
+  								@if( $category->description )
+  									{{ $category->description }}
+  								@else
+  									<i>{{ __('No Description') }}</i>	
+  								@endif
+  							</td>
+  							<td>
+  								@if( $categoryAuthorName )
+  									{{ $categoryAuthorName }}
+  								@else
+  									<i>{{ __('No Author') }}</i>	
+  								@endif
+  							</td>
+  							<td>
+  								@if( $category->created_at )
+  									{{ $category->created_at->diffForHumans() }}
+  								@else 
+  									<i>{{ __('No Created At Detail') }}</i>	
+  								@endif
+  							</td>
   							<td><a href="{{ route('category.edit', ['id' => $category->id]) }}" class="btn btn-sm btn-primary">{{ __('Edit') }}</a></td>
   							<td>
   								<form method="POST" action="{{ route('category.delete', ['id' => $category->id]) }}" id="delete-category-form-{{ $category->id }}">
