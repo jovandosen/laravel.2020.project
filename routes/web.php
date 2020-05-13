@@ -232,3 +232,5 @@ Route::get('login/bitbucket/callback', 'Auth\LoginController@handleBitbucketProv
 Route::get('/role/create', 'RoleController@create')->name('role.show');
 
 Route::post('/role', 'RoleController@store')->name('role.store');
+
+Route::get('/role/list', 'RoleController@index')->name('role.list');

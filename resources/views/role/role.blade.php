@@ -4,6 +4,15 @@
 
 @section('content')
 <div class="container">
+	@if( session()->has('roleCreated') )
+		<div class="row justify-content-center" id="flash-message-box">
+			<div class="col-md-8">
+				<div class="alert alert-success" role="alert" id="flash-message-content">
+					{{ session()->get('roleCreated') }}
+				</div>
+			</div>	
+		</div>	
+	@endif
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 
