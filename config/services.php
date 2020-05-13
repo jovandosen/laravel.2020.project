@@ -36,4 +36,10 @@ return [
         'redirect' => 'http://laravel.2020.project/login/github/callback',
     ],
 
+    'bitbucket' => [
+        'client_id' => env('BITBUCKET_CLIENT_ID'),
+        'client_secret' => env('BITBUCKET_CLIENT_SECRET'),
+        'redirect' => 'http://laravel.2020.project/login/bitbucket/callback',
+    ],
+
 ];

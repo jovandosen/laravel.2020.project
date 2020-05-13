@@ -220,3 +220,9 @@ Route::get('/resource/movie', function () {
 Route::get('login/github', 'Auth\LoginController@redirectToProvider')->name('github.log');
 
 Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback'); 
+
+// Bitbucket login routes
+
+Route::get('login/bitbucket', 'Auth\LoginController@redirectToBitbucketProvider')->name('bitbucket.log');
+
+Route::get('login/bitbucket/callback', 'Auth\LoginController@handleBitbucketProviderCallback');

@@ -78,4 +78,43 @@ class LoginController extends Controller
             }
         }
     }
+
+    /**
+     * Redirect the user to the Bitbucket authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToBitbucketProvider()
+    {
+        return Socialite::driver('bitbucket')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Bitbucket.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleBitbucketProviderCallback()
+    {
+        $user = Socialite::driver('bitbucket')->user();
+
+        $userName = $user->nickname;
+        $userEmail = $user->email;
+
+        $userData = User::where("email", $userEmail)->first();
+
+        if($userData){
+            Auth::login($userData, true);
+            return redirect()->route('home');
+        } else {
+            $newUser = User::create([
+                'name' => $userName,
+                'email' => $userEmail,
+                'password' => password_hash('protector994', PASSWORD_DEFAULT)
+            ]);
+            if($newUser){
+                return redirect()->route('home');
+            }
+        }
+    }
 }
