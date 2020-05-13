@@ -37518,6 +37518,13 @@ window.confirmPhoneNumberDelete = function () {
   $("#delete-phone-number").submit();
 };
 
+window.deleteRole = function (that) {
+  var el = that;
+  var formID = el.dataset.send;
+  $("#roleModal").modal('toggle');
+  $("#" + formID).submit();
+};
+
 /***/ }),
 
 /***/ "./resources/js/product.js":

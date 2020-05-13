@@ -62,4 +62,24 @@ class RoleController extends Controller
     	$roles = Role::all();
     	return View::make('role.roles', ['roles' => $roles]);
     }
+
+    /**
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+    	$roleID = (int) $id;
+
+    	$role = Role::find($roleID);
+
+    	$role->delete();
+
+    	$request->session()->flash('roleDeleted', 'You have successfully deleted Role.');
+
+        return redirect()->route('role.list');
+    }
 }

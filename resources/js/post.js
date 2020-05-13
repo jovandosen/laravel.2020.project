@@ -130,3 +130,10 @@ window.confirmPhoneNumberDelete = function(){
 	$("#phoneNumberModal").modal('toggle');
     $("#delete-phone-number").submit();
 }
+
+window.deleteRole = function(that){
+	var el = that;
+	var formID = el.dataset.send;
+	$("#roleModal").modal('toggle');
+	$("#" + formID).submit();
+}

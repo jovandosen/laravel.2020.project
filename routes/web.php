@@ -234,3 +234,5 @@ Route::get('/role/create', 'RoleController@create')->name('role.show');
 Route::post('/role', 'RoleController@store')->name('role.store');
 
 Route::get('/role/list', 'RoleController@index')->name('role.list');
+
+Route::delete('/role/delete/{id}', 'RoleController@destroy')->name('role.delete');
