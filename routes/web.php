@@ -226,3 +226,9 @@ Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback
 Route::get('login/bitbucket', 'Auth\LoginController@redirectToBitbucketProvider')->name('bitbucket.log');
 
 Route::get('login/bitbucket/callback', 'Auth\LoginController@handleBitbucketProviderCallback');
+
+// Role routes
+
+Route::get('/role/create', 'RoleController@create')->name('role.show');
+
+Route::post('/role', 'RoleController@store')->name('role.store');

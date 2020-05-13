@@ -78,6 +78,8 @@
                                     <a class="dropdown-item" href="{{ route('home') }}">{{ __('Home') }}</a>
                                     <a class="dropdown-item" href="{{ route('phone.number') }}">{{ __('Phone Number') }}</a>
                                     <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('role.show') }}">{{ __('Add Role') }}</a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('post.show') }}">{{ __('Add Post') }}</a>
                                     <a class="dropdown-item" href="{{ route('post.list') }}">{{ __('Post List') }}</a>
                                     <a class="dropdown-item" href="{{ route('category.show') }}">{{ __('Add Category') }}</a>
