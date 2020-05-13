@@ -229,7 +229,7 @@ Route::get('login/bitbucket/callback', 'Auth\LoginController@handleBitbucketProv
 
 // Role routes
 
-Route::get('/role/create', 'RoleController@create')->name('role.show');
+Route::get('/role/create', 'RoleController@create')->name('role.show')->middleware('can:create,App\Role');
 
 Route::post('/role', 'RoleController@store')->name('role.store');
 

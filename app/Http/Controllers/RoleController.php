@@ -76,6 +76,8 @@ class RoleController extends Controller
 
     	$role = Role::find($roleID);
 
+        $this->authorize('delete', $role);
+
     	$role->delete();
 
     	$request->session()->flash('roleDeleted', 'You have successfully deleted Role.');
@@ -112,6 +114,8 @@ class RoleController extends Controller
     	$roleID = (int) $id;
 
     	$role = Role::find($roleID);
+
+        $this->authorize('update', $role);
 
     	$role->roleName = $request->input('roleName');
     	$role->roleDescription = $request->input('roleDescription');
