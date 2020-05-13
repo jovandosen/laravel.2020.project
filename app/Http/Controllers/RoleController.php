@@ -39,8 +39,10 @@ class RoleController extends Controller
     {
     	$roleName = $request->input('roleName');
     	$roleDescription = $request->input('roleDescription');
+        $userID = $request->input('userID');
 
     	$role = Role::create([
+            'user_id' => $userID,
     		'roleName' => $roleName,
     		'roleDescription' => $roleDescription
     	]);
