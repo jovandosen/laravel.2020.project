@@ -214,3 +214,9 @@ Route::get('/resource/post', function () {
 Route::get('/resource/movie', function () {
     return MovieResource::collection(Movie::all());
 });
+
+// Github login routes
+
+Route::get('login/github', 'Auth\LoginController@redirectToProvider')->name('github.log');
+
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback'); 
