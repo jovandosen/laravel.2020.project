@@ -50,7 +50,7 @@
   								@endif
   							</td>
   							<td>
-  								<a href="#">{{ __('Edit') }}</a>
+  								<a href="{{ route('role.edit', ['id' => $role->id]) }}" class="btn btn-sm btn-primary">{{ __('EDIT') }}</a>
   							</td>
   							<td>
   								<form method="POST" action="{{ route('role.delete', ['id' => $role->id]) }}" id="delete-role-form-{{ $role->id }}">

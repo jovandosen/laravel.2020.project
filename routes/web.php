@@ -236,3 +236,7 @@ Route::post('/role', 'RoleController@store')->name('role.store');
 Route::get('/role/list', 'RoleController@index')->name('role.list');
 
 Route::delete('/role/delete/{id}', 'RoleController@destroy')->name('role.delete');
+
+Route::get('/role/edit/{id}', 'RoleController@edit')->name('role.edit');
+
+Route::patch('/role/update/{id}', 'RoleController@update')->name('role.update');

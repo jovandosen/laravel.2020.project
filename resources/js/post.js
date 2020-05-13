@@ -137,3 +137,8 @@ window.deleteRole = function(that){
 	$("#roleModal").modal('toggle');
 	$("#" + formID).submit();
 }
+
+window.confirmRoleUpdate = function(){
+	$("#roleModal").modal('toggle');
+	$("#update-role-form").submit();
+}

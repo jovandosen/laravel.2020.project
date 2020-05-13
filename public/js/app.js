@@ -37525,6 +37525,11 @@ window.deleteRole = function (that) {
   $("#" + formID).submit();
 };
 
+window.confirmRoleUpdate = function () {
+  $("#roleModal").modal('toggle');
+  $("#update-role-form").submit();
+};
+
 /***/ }),
 
 /***/ "./resources/js/product.js":
