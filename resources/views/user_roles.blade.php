@@ -4,10 +4,28 @@
 
 @section('content')
 <div class="container">
+	@if( session()->has('rolesAssigned') )
+		<div class="row justify-content-center" id="flash-message-box">
+			<div class="col-md-8">
+				<div class="alert alert-success" role="alert" id="flash-message-content">
+					{{ session()->get('rolesAssigned') }}
+				</div>
+			</div>	
+		</div>	
+	@endif
+	@if( session()->has('rolesUpdated') )
+		<div class="row justify-content-center" id="flash-message-box">
+			<div class="col-md-8">
+				<div class="alert alert-success" role="alert" id="flash-message-content">
+					{{ session()->get('rolesUpdated') }}
+				</div>
+			</div>	
+		</div>	
+	@endif
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 			
-			<form method="POST" action="#">
+			<form method="POST" action="{{ route('user.roles') }}">
 
 				<div class="form-group">
 					<label for="userName">User Name</label>
@@ -25,14 +43,24 @@
 
 					@foreach( $roles as $role )
 
+						@php
+							if( in_array($role->id, $userRoles) ){
+								$checked = "checked";
+							} else {
+								$checked = "";
+							}
+						@endphp
+
 						<div class="custom-control custom-checkbox">
-        					<input type="checkbox" class="custom-control-input" id="{{ $role->roleName }}" value="{{ $role->id }}" name="userRoles[]">
+        					<input type="checkbox" class="custom-control-input" id="{{ $role->roleName }}" value="{{ $role->id }}" name="userRoles[]" @php echo $checked; @endphp>
         					<label class="custom-control-label" for="{{ $role->roleName }}">{{ $role->roleName }}</label>
       					</div>
 
 					@endforeach
 
 				</div>
+
+				<input type="hidden" name="userID" value="{{ $user->id }}">
 
 				<button class="btn btn-primary" type="submit">{{ __('ASSIGN ROLES') }}</button>
 				@csrf

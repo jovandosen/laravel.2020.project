@@ -246,3 +246,5 @@ Route::patch('/role/update/{id}', 'RoleController@update')->name('role.update');
 Route::get('/users/list', 'UserController@index')->name('users.list');
 
 Route::get('/assign/roles/{id}', 'UserController@assignRoles')->name('assign.roles');
+
+Route::post('/assign', 'UserController@assignRolesToUser')->name('user.roles');
