@@ -16,7 +16,7 @@
   				</thead>
   				<tbody>
   					@foreach( $users as $user )
-  						<tr>
+  						<tr title="Click on row to assign Roles to User" onclick="getUserDataAndRedirect(this)" id="{{ $user->id }}">
   							<td>
   								@if( $user->name )
   									{{ $user->name }}

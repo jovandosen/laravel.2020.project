@@ -37377,6 +37377,8 @@ __webpack_require__(/*! ./post */ "./resources/js/post.js");
 
 __webpack_require__(/*! ./product */ "./resources/js/product.js");
 
+__webpack_require__(/*! ./user */ "./resources/js/user.js");
+
 /***/ }),
 
 /***/ "./resources/js/post.js":
@@ -37565,6 +37567,24 @@ window.removeProductImage = function (that) {
   var images = JSON.stringify(imgList);
   $("#removedProductImages").val(images);
   $(productImageParent).remove();
+};
+
+/***/ }),
+
+/***/ "./resources/js/user.js":
+/*!******************************!*\
+  !*** ./resources/js/user.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {//
+});
+
+window.getUserDataAndRedirect = function (that) {
+  var el = that;
+  var id = $(el).attr("id");
+  window.location.href = "http://laravel.2020.project/assign/roles/" + id;
 };
 
 /***/ }),
