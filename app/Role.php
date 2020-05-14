@@ -19,4 +19,12 @@ class Role extends Model
      * @var array
      */
     protected $fillable = ['user_id', 'roleName', 'roleDescription'];
+
+    /**
+     * The users that belong to the role.
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
 }

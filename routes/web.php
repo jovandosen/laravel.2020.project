@@ -240,3 +240,7 @@ Route::delete('/role/delete/{id}', 'RoleController@destroy')->name('role.delete'
 Route::get('/role/edit/{id}', 'RoleController@edit')->name('role.edit');
 
 Route::patch('/role/update/{id}', 'RoleController@update')->name('role.update');
+
+// User routes
+
+Route::get('/users/list', 'UserController@index')->name('users.list');
