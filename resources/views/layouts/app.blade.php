@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Favicon ico -->
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.jpg') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -68,6 +70,7 @@
                                 <a href="{{ route('test') }}" class="nav-link">{{ __('Test') }}</a>
                             </li> 
                             -->
+                            <a title="Click here to checkout" onclick="userCheckout()" href="javascript:void(0)" class="nav-link"><i class="fa fa-shopping-cart" style="font-size:18px;"></i> (<span id="items">0</span>)</a>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

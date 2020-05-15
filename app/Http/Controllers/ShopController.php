@@ -50,4 +50,16 @@ class ShopController extends Controller
 
     	return View::make('shop.product_details', ['product' => $product, 'productImages' => $productImages]);
     }
+
+    /**
+     * Display User Order
+     *
+     * @param  string  $data
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function processOrder($data)
+    {
+    	var_dump($data);
+    }
 }

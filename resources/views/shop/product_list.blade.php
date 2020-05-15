@@ -26,7 +26,7 @@
 					</div>
 					<div class="card-footer">
 						<a href="{{ route('product.details', ['id' => $product->id]) }}">details</a> |
-						<a href="#">add to cart</a> |
+						<a href="javascript:void(0)" id="{{ $product->id }}" onclick='addProductToCart("{{ $product->id }}", this)'>add to cart</a> |
 						<span>
 							@if( $product->price )
 								<strong>{{ $product->price }}$</strong>
@@ -40,4 +40,5 @@
 		@endforeach
 	</div>
 </div>
+<input type="hidden" name="cartItems" id="cart-items" value="">
 @endsection

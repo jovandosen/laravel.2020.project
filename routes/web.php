@@ -254,3 +254,5 @@ Route::post('/assign', 'UserController@assignRolesToUser')->name('user.roles');
 Route::get('/shop', 'ShopController@productList')->name('shop');
 
 Route::get('/product/details/{id}', 'ShopController@productDetails')->name('product.details');
+
+Route::get('/process/order/{data}', 'ShopController@processOrder')->name('process.order');
