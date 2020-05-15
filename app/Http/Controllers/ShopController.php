@@ -42,6 +42,12 @@ class ShopController extends Controller
 
     	$product = Product::find($productID);
 
-    	return View::make('shop.product_details', ['product' => $product]);
+    	if( !empty($product->images) ){
+            $productImages = unserialize($product->images);
+        } else {
+            $productImages = [];
+        }
+
+    	return View::make('shop.product_details', ['product' => $product, 'productImages' => $productImages]);
     }
 }
