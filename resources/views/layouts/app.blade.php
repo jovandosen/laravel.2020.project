@@ -73,29 +73,47 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
+                                @php
+
+                                    $user = Auth::user();
+
+                                    $roleIds = [];
+
+                                    foreach( $user->roles as $role ){
+                                        $roleIds[] = $role->id;
+                                    }
+
+                                @endphp
+
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('profile') }}">{{ __('Profile') }}</a>
                                     <a class="dropdown-item" href="{{ route('home') }}">{{ __('Home') }}</a>
                                     <a class="dropdown-item" href="{{ route('phone.number') }}">{{ __('Phone Number') }}</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('role.show') }}">{{ __('Add Role') }}</a>
-                                    <a class="dropdown-item" href="{{ route('role.list') }}">{{ __('Role List') }}</a>
-                                    <div class="dropdown-divider"></div>
+                                    @if( in_array(1, $roleIds) )
+                                        <a class="dropdown-item" href="{{ route('role.show') }}">{{ __('Add Role') }}</a>
+                                        <a class="dropdown-item" href="{{ route('role.list') }}">{{ __('Role List') }}</a>
+                                        <div class="dropdown-divider"></div>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('users.list') }}">{{ __('User List') }}</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('post.show') }}">{{ __('Add Post') }}</a>
-                                    <a class="dropdown-item" href="{{ route('post.list') }}">{{ __('Post List') }}</a>
-                                    <a class="dropdown-item" href="{{ route('category.show') }}">{{ __('Add Category') }}</a>
-                                    <a class="dropdown-item" href="{{ route('category.list') }}">{{ __('Category List') }}</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('movie.show') }}">{{ __('Add Movie') }}</a>
-                                    <a class="dropdown-item" href="{{ route('movie.list') }}">{{ __('Movie List') }}</a>
-                                    <a class="dropdown-item" href="{{ route('genre.show') }}">{{ __('Add Genre') }}</a>
-                                    <a class="dropdown-item" href="{{ route('genre.list') }}">{{ __('Genre List') }}</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('product.show') }}">{{ __('Add Product') }}</a>
-                                    <a class="dropdown-item" href="{{ route('product.list') }}">{{ __('Product List') }}</a>
-                                    <div class="dropdown-divider"></div>
+                                    @if( (in_array(1, $roleIds)) || (in_array(2, $roleIds)) || (in_array(3, $roleIds)) )
+                                        <a class="dropdown-item" href="{{ route('post.show') }}">{{ __('Add Post') }}</a>
+                                        <a class="dropdown-item" href="{{ route('post.list') }}">{{ __('Post List') }}</a>
+                                        <a class="dropdown-item" href="{{ route('category.show') }}">{{ __('Add Category') }}</a>
+                                        <a class="dropdown-item" href="{{ route('category.list') }}">{{ __('Category List') }}</a>
+                                        <div class="dropdown-divider"></div>
+                                    @endif    
+                                    @if( in_array(1, $roleIds) )
+                                        <a class="dropdown-item" href="{{ route('movie.show') }}">{{ __('Add Movie') }}</a>
+                                        <a class="dropdown-item" href="{{ route('movie.list') }}">{{ __('Movie List') }}</a>
+                                        <a class="dropdown-item" href="{{ route('genre.show') }}">{{ __('Add Genre') }}</a>
+                                        <a class="dropdown-item" href="{{ route('genre.list') }}">{{ __('Genre List') }}</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{ route('product.show') }}">{{ __('Add Product') }}</a>
+                                        <a class="dropdown-item" href="{{ route('product.list') }}">{{ __('Product List') }}</a>
+                                        <div class="dropdown-divider"></div>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('password.request') }}">{{ __('Reset Password') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
