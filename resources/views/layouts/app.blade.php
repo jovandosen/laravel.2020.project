@@ -114,6 +114,8 @@
                                         <a class="dropdown-item" href="{{ route('product.list') }}">{{ __('Product List') }}</a>
                                         <div class="dropdown-divider"></div>
                                     @endif
+                                    <a class="dropdown-item" href="{{ route('shop') }}">{{ __('Shop') }}</a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('password.request') }}">{{ __('Reset Password') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

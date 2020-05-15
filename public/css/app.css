@@ -10920,3 +10920,7 @@ a.text-dark:focus {
   text-decoration: underline;
 }
 
+.product-box {
+  margin-bottom: 10px;
+}
+

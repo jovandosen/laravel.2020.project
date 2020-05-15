@@ -37379,6 +37379,8 @@ __webpack_require__(/*! ./product */ "./resources/js/product.js");
 
 __webpack_require__(/*! ./user */ "./resources/js/user.js");
 
+__webpack_require__(/*! ./shop */ "./resources/js/shop.js");
+
 /***/ }),
 
 /***/ "./resources/js/post.js":
@@ -37568,6 +37570,18 @@ window.removeProductImage = function (that) {
   $("#removedProductImages").val(images);
   $(productImageParent).remove();
 };
+
+/***/ }),
+
+/***/ "./resources/js/shop.js":
+/*!******************************!*\
+  !*** ./resources/js/shop.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {//
+});
 
 /***/ }),
 
