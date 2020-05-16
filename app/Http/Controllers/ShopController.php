@@ -48,7 +48,19 @@ class ShopController extends Controller
             $productImages = [];
         }
 
-    	return View::make('shop.product_details', ['product' => $product, 'productImages' => $productImages]);
+        if( !empty( session('productItems') ) ){
+
+            $ids = session('productItems');
+
+            if( in_array($productID, $ids) ){
+                $inCart = true;
+            } else {
+                $inCart = false;
+            }
+
+        }
+
+    	return View::make('shop.product_details', ['product' => $product, 'productImages' => $productImages, 'inCart' => $inCart]);
     }
 
     /**
@@ -79,6 +91,7 @@ class ShopController extends Controller
         }
 
         session(['productItems' => $ids]);
+        session(['productItemsData' => $data]);
 
     	return view('shop.process_order', ['products' => $products, 'total' => $total, 'data' => $data]);
     }
@@ -91,6 +104,7 @@ class ShopController extends Controller
     public function clearCart()
     {
         session()->forget('productItems');
+        session()->forget('productItemsData');
         return redirect()->route('shop');
     }
 }

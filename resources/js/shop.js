@@ -124,3 +124,51 @@ window.addProduct = function(that){
 
 	$("#cart-total").empty().text(total+"$");
 }
+
+window.addToCart = function(that){
+
+	var productId = $(that).attr("id");
+
+	var cartDetails = $("#cart-items").val();
+
+	var recordIds = cartDetails.split(",");
+
+	recordIds.unshift(productId);
+
+	$(that).text('REMOVE FROM CART');
+
+	$(that).attr("onclick", 'removeFromCart(this)');
+
+	var productCount = parseInt( $("#items").text() );
+
+	productCount++;
+
+	$("#items").empty().text(productCount);
+
+	$("#cart-items").val( recordIds.join() );
+}
+
+window.removeFromCart = function(that){
+
+	var productId = $(that).attr("id");
+
+	var cartDetails = $("#cart-items").val();
+
+	var recordIds = cartDetails.split(",");
+
+	recordIds = recordIds.filter(function(item){
+		return item != productId;
+	});
+
+	$(that).text('ADD TO CART');
+
+	$(that).attr("onclick", 'addToCart(this)');
+
+	var productCount = parseInt( $("#items").text() );
+
+	productCount--;
+
+	$("#items").empty().text(productCount);
+
+	$("#cart-items").val( recordIds.join() );
+}

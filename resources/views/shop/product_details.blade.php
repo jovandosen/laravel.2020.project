@@ -73,12 +73,22 @@
 
 				</div>
 
-				<a class="btn btn-outline-primary" href="javascript:void(0)" id="{{ $product->id }}" onclick='addProductToCart("{{ $product->id }}", this)'>{{ __('ADD TO CART') }}</a>
+				@if($inCart)
+					<a class="btn btn-outline-primary" href="javascript:void(0)" id="{{ $product->id }}" onclick='removeFromCart(this)'>{{ __('REMOVE FROM CART') }}</a>
+				@else
+					<a class="btn btn-outline-primary" href="javascript:void(0)" id="{{ $product->id }}" onclick='addToCart(this)'>{{ __('ADD TO CART') }}</a>
+				@endif
+				
 				<a class="btn btn-outline-primary" href="{{ route('shop') }}">{{ __('BACK TO SHOP') }}</a>
 
 			</form>
 		</div>
 	</div>
 </div>
-<input type="hidden" name="cartItems" id="cart-items" value="">
+@php
+	if( !empty( session('productItemsData') ) ){
+		$orderedItems = session('productItemsData');
+	} 
+@endphp
+<input type="hidden" name="cartItems" id="cart-items" value="{{ $orderedItems }}">
 @endsection
