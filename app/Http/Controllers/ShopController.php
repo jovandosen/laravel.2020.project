@@ -58,8 +58,39 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function processOrder($data)
+    public function processOrder($data = '')
     {
-    	var_dump($data);
+        if( empty($data) ){
+            $ids = [];
+        } else {
+            $ids = explode(",", $data);
+        }
+
+        $products = [];
+
+        $total = 0;
+
+        if( $ids ){
+            foreach ($ids as $key => $value) {
+                $product = Product::find($value);
+                $products[] = $product;
+                $total = $total + $product->price;
+            }
+        }
+
+        session(['productItems' => $ids]);
+
+    	return view('shop.process_order', ['products' => $products, 'total' => $total, 'data' => $data]);
+    }
+
+    /**
+     * Clear cart data
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function clearCart()
+    {
+        session()->forget('productItems');
+        return redirect()->route('shop');
     }
 }

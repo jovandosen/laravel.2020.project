@@ -73,11 +73,12 @@
 
 				</div>
 
-				<a class="btn btn-outline-primary" href="#">{{ __('ADD TO CART') }}</a>
+				<a class="btn btn-outline-primary" href="javascript:void(0)" id="{{ $product->id }}" onclick='addProductToCart("{{ $product->id }}", this)'>{{ __('ADD TO CART') }}</a>
 				<a class="btn btn-outline-primary" href="{{ route('shop') }}">{{ __('BACK TO SHOP') }}</a>
 
 			</form>
 		</div>
 	</div>
 </div>
+<input type="hidden" name="cartItems" id="cart-items" value="">
 @endsection

@@ -41,4 +41,14 @@
 	</div>
 </div>
 <input type="hidden" name="cartItems" id="cart-items" value="">
+@php
+	if( !empty( session('productItems') ) ){
+		$orderedItems = session('productItems');
+		$orderedItems = json_encode($orderedItems);
+	} else {
+		$orderedItems = [];
+		$orderedItems = json_encode($orderedItems);
+	}
+@endphp
+<input type="hidden" name="orderedItems" id="ordered-items" value="{{ $orderedItems }}">
 @endsection

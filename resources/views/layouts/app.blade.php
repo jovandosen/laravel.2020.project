@@ -70,7 +70,15 @@
                                 <a href="{{ route('test') }}" class="nav-link">{{ __('Test') }}</a>
                             </li> 
                             -->
-                            <a title="Click here to checkout" onclick="userCheckout()" href="javascript:void(0)" class="nav-link"><i class="fa fa-shopping-cart" style="font-size:18px;"></i> (<span id="items">0</span>)</a>
+                            @php
+                                if(!empty( session('productItems') )){
+                                    $cart = session('productItems');
+                                    $itemNumber = count($cart);
+                                } else {
+                                    $itemNumber = 0;
+                                }
+                            @endphp
+                            <a title="Click here to checkout" onclick="userCheckout()" href="javascript:void(0)" class="nav-link"><i class="fa fa-shopping-cart" style="font-size:18px;"></i> (<span id="items">{{ $itemNumber }}</span>)</a>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
