@@ -258,3 +258,7 @@ Route::get('/product/details/{id}', 'ShopController@productDetails')->name('prod
 Route::get('/process/order/{data?}', 'ShopController@processOrder')->name('process.order');
 
 Route::get('/clear/cart', 'ShopController@clearCart')->name('clear.cart');
+
+// Ajax test routes
+
+Route::get('/test/ajax', 'ShopController@testAjax')->name('test.ajax');

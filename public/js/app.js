@@ -37585,6 +37585,7 @@ $(document).ready(function () {
   $("#product-form-filters").on("click", function () {
     $("#price-range-box").toggle("slow");
   });
+  testAjax();
 });
 var totalItems = 0;
 var productIds = [];
@@ -37693,6 +37694,22 @@ window.removeFromCart = function (that) {
   $("#items").empty().text(productCount);
   $("#cart-items").val(recordIds.join());
 };
+
+function testAjax() {
+  $.ajax({
+    type: 'GET',
+    url: '/test/ajax',
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function success(data) {
+      console.log(data);
+    },
+    error: function error(data) {
+      console.log(data);
+    }
+  });
+}
 
 /***/ }),
 

@@ -5,6 +5,8 @@ $(document).ready(function(){
 		$("#price-range-box").toggle("slow");
 	});
 
+	testAjax();
+
 });
 
 var totalItems = 0;
@@ -176,4 +178,21 @@ window.removeFromCart = function(that){
 	$("#items").empty().text(productCount);
 
 	$("#cart-items").val( recordIds.join() );
+}
+
+function testAjax()
+{
+	$.ajax({
+		type: 'GET',
+		url: '/test/ajax',
+		headers: {
+        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    	},
+    	success: function(data){
+    		console.log(data);
+    	},
+    	error: function(data){
+    		console.log(data);
+    	}
+	});
 }

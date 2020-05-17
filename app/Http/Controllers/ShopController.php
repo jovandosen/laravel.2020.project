@@ -145,4 +145,14 @@ class ShopController extends Controller
         session()->forget('productItemsData');
         return redirect()->route('shop');
     }
+
+    /**
+     * Test ajax 
+     *
+     * @return string
+     */
+    public function testAjax()
+    {
+        echo "Well and Good...";
+    }
 }
