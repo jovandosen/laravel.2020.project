@@ -28,19 +28,41 @@ class ShopController extends Controller
      */
     public function productList(Request $request)
     {
-        if( !empty( $request->search ) ){
 
-            $search = $request->search;
+        $priceFrom = (int) $request->priceFrom;
+        $priceTo = (int) $request->priceTo;
+        $searchTerm = $request->search;
+
+        if( is_null($searchTerm) ){
+            $searchTerm = '';
+        }
+
+        if( $priceTo === 0 ){
+            $priceTo = DB::table('products')->pluck('price')->max();
+        }
+
+        if( !empty( $searchTerm ) ){
 
             $products = DB::table('products')
-                                        ->where('name', 'like', "%$search%")
-                                        ->orWhere('manufacturer', 'like', "%$search%")
-                                        ->orWhere('description', 'like', "%$search%")
-                                        ->paginate(4);
+                                    ->where('price', '>', $priceFrom)
+                                    ->where('price', '<', $priceTo)
+                                    ->where(function ($query) use ($searchTerm) {
+                                        $query->where('name', 'like', "%$searchTerm%")
+                                              ->orWhere('manufacturer', 'like', "%$searchTerm%")
+                                              ->orWhere('description', 'like', "%$searchTerm%");
+                                    })
+                                    ->paginate(4);
+
+        } elseif( isset($request->priceFrom) || isset($request->priceTo) ){
+
+            $products = DB::table('products')
+                                    ->where('price', '>', $priceFrom)
+                                    ->where('price', '<', $priceTo)
+                                    ->paginate(4);
 
         } else {
             $products = Product::paginate(12);
-        }
+        }                            
 
     	return View::make('shop.product_list', ['products' => $products]);
     }
