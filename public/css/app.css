@@ -10920,6 +10920,14 @@ a.text-dark:focus {
   text-decoration: underline;
 }
 
+#search-products {
+  width: 50%;
+}
+
+.products-pagination-box {
+  margin-top: 20px;
+}
+
 .product-box {
   margin-bottom: 10px;
 }

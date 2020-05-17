@@ -37582,6 +37582,9 @@ window.removeProductImage = function (that) {
 
 $(document).ready(function () {
   checkCart();
+  $("#product-form-filters").on("click", function () {
+    $("#price-range-box").toggle("slow");
+  });
 });
 var totalItems = 0;
 var productIds = [];

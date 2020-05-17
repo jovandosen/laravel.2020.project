@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use View;
 use App\Product;
+use DB;
 
 class ShopController extends Controller
 {
@@ -21,11 +22,26 @@ class ShopController extends Controller
     /**
      * Display Product List
      *
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function productList()
+    public function productList(Request $request)
     {
-    	$products = Product::all();
+        if( !empty( $request->search ) ){
+
+            $search = $request->search;
+
+            $products = DB::table('products')
+                                        ->where('name', 'like', "%$search%")
+                                        ->orWhere('manufacturer', 'like', "%$search%")
+                                        ->orWhere('description', 'like', "%$search%")
+                                        ->paginate(4);
+
+        } else {
+            $products = Product::paginate(12);
+        }
+
     	return View::make('shop.product_list', ['products' => $products]);
     }
 
