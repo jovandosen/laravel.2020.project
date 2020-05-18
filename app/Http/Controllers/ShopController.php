@@ -9,6 +9,7 @@ use DB;
 use App\User;
 use App\Order;
 use Auth;
+use App\Events\OrderCreated;
 
 class ShopController extends Controller
 {
@@ -220,6 +221,7 @@ class ShopController extends Controller
         ]);
 
         if( $order ){
+            event(new OrderCreated($order));
             $request->session()->flash('orderCreated', 'You have successfully ordered Products.');
             session()->forget('productIds');
             return redirect()->route('shop');
