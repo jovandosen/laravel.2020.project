@@ -71,8 +71,8 @@
                             </li> 
                             -->
                             @php
-                                if(!empty( session('productItems') )){
-                                    $cart = session('productItems');
+                                if(!empty( session('productIds') )){
+                                    $cart = session('productIds');
                                     $itemNumber = count($cart);
                                 } else {
                                     $itemNumber = 0;
@@ -146,6 +146,15 @@
         </nav>
 
         <main class="py-4">
+            @php
+                if(!empty( session('productIds') )){
+                    $data = session('productIds');
+                    $data = json_encode($data);
+                } else {
+                    $data = '';
+                }
+            @endphp
+            <input type="hidden" name="orderedItems" id="ordered-items" value="@php echo $data; @endphp">
             @yield('content')
         </main>
     </div>

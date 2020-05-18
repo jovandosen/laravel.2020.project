@@ -86,9 +86,9 @@ class ShopController extends Controller
             $productImages = [];
         }
 
-        if( !empty( session('productItems') ) ){
+        if( !empty( session('productIds') ) ){
 
-            $ids = session('productItems');
+            $ids = session('productIds');
 
             if( in_array($productID, $ids) ){
                 $inCart = true;
@@ -104,34 +104,29 @@ class ShopController extends Controller
     /**
      * Display User Order
      *
-     * @param  string  $data
-     *
      * @return \Illuminate\Http\Response
      */
-    public function processOrder($data = '')
+    public function processOrder()
     {
-        if( empty($data) ){
-            $ids = [];
-        } else {
-            $ids = explode(",", $data);
-        }
-
         $products = [];
 
         $total = 0;
 
-        if( $ids ){
-            foreach ($ids as $key => $value) {
-                $product = Product::find($value);
-                $products[] = $product;
-                $total = $total + $product->price;
+        if( !empty( session('productIds') ) ){
+
+            $ids = session('productIds');
+
+            if( $ids ){
+                foreach ($ids as $key => $value) {
+                    $product = Product::find($value);
+                    $products[] = $product;
+                    $total = $total + $product->price;
+                }
             }
+
         }
 
-        session(['productItems' => $ids]);
-        session(['productItemsData' => $data]);
-
-    	return view('shop.process_order', ['products' => $products, 'total' => $total, 'data' => $data]);
+        return view('shop.process_order', ['products' => $products, 'total' => $total]);
     }
 
     /**
@@ -141,18 +136,57 @@ class ShopController extends Controller
      */
     public function clearCart()
     {
-        session()->forget('productItems');
-        session()->forget('productItemsData');
+        session()->forget('productIds');
         return redirect()->route('shop');
     }
 
     /**
-     * Test ajax 
+     * Add product to cart
      *
-     * @return string
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return void
      */
-    public function testAjax()
+    public function cartAdd(Request $request)
     {
-        echo "Well and Good...";
+        $productID = (int) $request->productID;
+        
+        if( !empty( session('productIds') ) ){
+            $ids = session('productIds');
+            $ids[] = $productID;
+            session(['productIds' => $ids]);
+        } else {
+            $ids = [];
+            $ids[] = $productID;
+            session(['productIds' => $ids]);
+        }
+
+    }
+
+    /**
+     * Remove product from cart
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return void
+     */
+    public function cartRemove(Request $request)
+    {
+        $productID = (int) $request->productID;
+
+        if( !empty( session('productIds') ) ){
+
+            $ids = session('productIds');
+
+            $itemIds = [];
+
+            foreach ($ids as $key => $value) {
+                if( $productID !== $value ){
+                    $itemIds[] = $value;
+                }
+            }
+
+            session(['productIds' => $itemIds]);
+        } 
     }
 }

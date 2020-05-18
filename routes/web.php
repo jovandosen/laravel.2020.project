@@ -255,10 +255,10 @@ Route::get('/shop', 'ShopController@productList')->name('shop');
 
 Route::get('/product/details/{id}', 'ShopController@productDetails')->name('product.details');
 
-Route::get('/process/order/{data?}', 'ShopController@processOrder')->name('process.order');
+Route::get('/process/order', 'ShopController@processOrder')->name('process.order');
 
 Route::get('/clear/cart', 'ShopController@clearCart')->name('clear.cart');
 
-// Ajax test routes
+Route::get('/cart/add', 'ShopController@cartAdd')->name('cart.add');
 
-Route::get('/test/ajax', 'ShopController@testAjax')->name('test.ajax');
+Route::get('/cart/remove', 'ShopController@cartRemove')->name('cart.remove');

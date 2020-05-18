@@ -26,7 +26,7 @@
                 @php
                     $productID = $product->id;
                 @endphp
-                <a href="javascript:void(0)" class="btn btn-outline-primary" data-price="{{ $product->price }}" id="{{ $product->id }}" onclick="removeProduct(this)">{{ __('remove from cart') }}</a>
+                <a href="javascript:void(0)" class="btn btn-outline-primary" data-price="{{ $product->price }}" id="{{ $product->id }}" onclick='removeProductFromCart("{{ $product->id }}", this)'>{{ __('remove from cart') }}</a>
             </div>    
         </div>
         <hr>
@@ -48,6 +48,5 @@
         </div>
     </div>              
 </div>
-<input type="hidden" name="cartItems" id="cart-items" value="{{ $data }}">
-<input type="hidden" name="cash" id="cash" value="{{ $total }}">
+<input type="hidden" name="productList" id="product-list" value="">
 @endsection
