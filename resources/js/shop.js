@@ -38,6 +38,21 @@ window.addProductToCart = function(id, element){
     	}
 	});
 
+	if( $("#process-order").val() != '' ){
+
+		var total = $("#cart-total").text();
+
+		var productPrice = element.dataset.price;
+
+		total = parseInt(total);
+
+		productPrice = parseInt(productPrice);
+
+		var newTotal = total + productPrice;
+
+		$("#cart-total").text(newTotal+"$");
+	}
+
 }
 
 window.removeProductFromCart = function(id, element){
@@ -69,6 +84,21 @@ window.removeProductFromCart = function(id, element){
     		console.log('Error while processing order.');
     	}
 	});
+
+	if( $("#process-order").val() != '' ){
+
+		var total = $("#cart-total").text();
+
+		var productPrice = element.dataset.price;
+
+		total = parseInt(total);
+
+		productPrice = parseInt(productPrice);
+
+		var newTotal = total - productPrice;
+
+		$("#cart-total").text(newTotal+"$");
+	}
 
 }
 
@@ -102,4 +132,9 @@ function checkCart()
 
 		}
 	}
+}
+
+window.processUserOrder = function(){
+	$("#orderModal").modal('toggle');
+	window.location.href = "http://laravel.2020.project/process/user/order";
 }

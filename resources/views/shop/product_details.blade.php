@@ -86,4 +86,5 @@
 	</div>
 </div>
 <input type="hidden" name="productList" id="product-list" value="">
+<input type="hidden" name="processOrder" id="process-order" value="">
 @endsection

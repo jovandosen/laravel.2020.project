@@ -96,6 +96,8 @@ class ShopController extends Controller
                 $inCart = false;
             }
 
+        } else {
+            $inCart = false;
         }
 
     	return View::make('shop.product_details', ['product' => $product, 'productImages' => $productImages, 'inCart' => $inCart]);
@@ -188,5 +190,15 @@ class ShopController extends Controller
 
             session(['productIds' => $itemIds]);
         } 
+    }
+
+    /**
+     * Process User Order
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function processUserOrder()
+    {
+        echo "Order logic";
     }
 }
