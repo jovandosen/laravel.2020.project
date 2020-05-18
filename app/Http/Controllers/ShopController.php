@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use View;
 use App\Product;
 use DB;
+use App\User;
+use App\Order;
+use Auth;
 
 class ShopController extends Controller
 {
@@ -195,10 +198,31 @@ class ShopController extends Controller
     /**
      * Process User Order
      *
+     * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function processUserOrder()
+    public function processUserOrder(Request $request)
     {
-        echo "Order logic";
+        $userID = Auth::user()->id;
+
+        if( !empty( session('productIds') ) ){
+            $ids = session('productIds');
+        } else {
+            $ids = [];
+        }
+
+        $ids = json_encode($ids);
+
+        $order = Order::create([
+            'user_id' => $userID,
+            'products' => $ids
+        ]);
+
+        if( $order ){
+            $request->session()->flash('orderCreated', 'You have successfully ordered Products.');
+            session()->forget('productIds');
+            return redirect()->route('shop');
+        }
     }
 }
