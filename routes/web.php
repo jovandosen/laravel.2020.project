@@ -264,3 +264,5 @@ Route::get('/cart/add', 'ShopController@cartAdd')->name('cart.add');
 Route::get('/cart/remove', 'ShopController@cartRemove')->name('cart.remove');
 
 Route::get('/process/user/order', 'ShopController@processUserOrder')->name('process.user.order');
+
+Route::get('/view/orders', 'ShopController@viewOrders')->name('view.orders');

@@ -227,4 +227,41 @@ class ShopController extends Controller
             return redirect()->route('shop');
         }
     }
+
+    /**
+     * Display User Orders
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewOrders()
+    {
+        $orders = Auth::user()->orders;
+
+        $results = [];
+
+        foreach ($orders as $key => $order) {
+
+            $products = [];
+
+            $ids = json_decode($order->products);
+            
+            for( $i = 0; $i < count($ids); $i++ ){
+
+                $product = Product::find($ids[$i]);
+
+                $products[] = $product;
+
+                if( ( $i + 1 ) === count($ids) ){
+                    $results[] = $products;
+                    break;
+                }    
+
+            }
+
+        }
+
+        $allOrders = $results;
+
+        return View::make('shop.view_orders', ['allOrders' => $allOrders]);
+    }
 }

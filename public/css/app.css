@@ -10932,3 +10932,12 @@ a.text-dark:focus {
   margin-bottom: 10px;
 }
 
+.order-break {
+  border-top: 1px solid #4d4d33;
+}
+
+.order-title {
+  border-left: 4px solid #ff9900;
+  padding-left: 2px;
+}
+
